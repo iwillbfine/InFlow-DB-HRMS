@@ -44,6 +44,17 @@ DROP TABLE IF EXISTS `role`;
 DROP TABLE IF EXISTS `position`;
 DROP TABLE IF EXISTS attendance_status_type;
 DROP TABLE IF EXISTS department;
+DROP TABLE IF EXISTS company;
+
+CREATE TABLE company (
+	company_id BIGINT PRIMARY KEY,
+	company_name VARCHAR(255) NOT NULL,
+	ceo VARCHAR(255) NOT NULL,
+	business_registration_number VARCHAR(255) NOT NULL,
+	company_address VARCHAR(255) NOT NULL,
+	company_phone_number VARCHAR(255) NOT NULL,
+	company_stamp_url TEXT NOT NULL
+);
 
 CREATE TABLE department (
    department_code VARCHAR(255) PRIMARY KEY,
