@@ -158,18 +158,18 @@ VALUES
 (10, '카카오', '모바일 앱 개발자', '2016-03-01 09:00:00', '2020-06-30 18:00:00', 5);
 
 -- 계약서 테이블
-INSERT INTO contract (contract_id, contract_type, created_at, file_url, review_status, employee_id, reviewer_id)
+INSERT INTO contract (contract_id, contract_type, created_at, file_name, file_url, review_status, employee_id, reviewer_id)
 VALUES 
-(1, '근로계약서', '2024-01-01 09:00:00', 'https://example.com/contract1.pdf', 'N', 1, 5),
-(2, '비밀유지서약서', '2024-02-01 09:00:00', 'https://example.com/contract2.pdf', 'Y', 2, 5),
-(3, '근로계약서', '2024-03-01 09:00:00', 'https://example.com/contract3.pdf', 'N', 3, 5),
-(4, '비밀유지서약서', '2024-04-01 09:00:00', 'https://example.com/contract4.pdf', 'Y', 4, 5),
-(5, '근로계약서', '2024-05-01 09:00:00', 'https://example.com/contract5.pdf', 'N', 5, 3),
-(6, '비밀유지서약서', '2024-06-01 09:00:00', 'https://example.com/contract6.pdf', 'Y', 1, 5),
-(7, '근로계약서', '2024-07-01 09:00:00', 'https://example.com/contract7.pdf', 'N', 2, 5),
-(8, '비밀유지서약서', '2024-08-01 09:00:00', 'https://example.com/contract8.pdf', 'Y', 3, 5),
-(9, '근로계약서', '2024-09-01 09:00:00', 'https://example.com/contract9.pdf', 'N', 4, 5),
-(10, '비밀유지서약서', '2024-10-01 09:00:00', 'https://example.com/contract10.pdf', 'Y', 5, 3);
+(1, '근로계약서', '2024-01-01 09:00:00', '홍길동_근로계약서', 'https://example.com/contract1.pdf', 'N', 1, 5),
+(2, '비밀유지서약서', '2024-02-01 09:00:00', '김영희_비밀유지서약서', 'https://example.com/contract2.pdf', 'Y', 2, 5),
+(3, '근로계약서', '2024-03-01 09:00:00', '박철수_근로계약서', 'https://example.com/contract3.pdf', 'N', 3, 5),
+(4, '비밀유지서약서', '2024-04-01 09:00:00', '이수정_비밀유지서약서', 'https://example.com/contract4.pdf', 'Y', 4, 5),
+(5, '근로계약서', '2024-05-01 09:00:00', '최강욱_근로계약서', 'https://example.com/contract5.pdf', 'N', 5, 3),
+(6, '비밀유지서약서', '2024-06-01 09:00:00', '홍길동_비밀유지서약서', 'https://example.com/contract6.pdf', 'Y', 1, 5),
+(7, '근로계약서', '2024-07-01 09:00:00', '김영희_근로계약서', 'https://example.com/contract7.pdf', 'N', 2, 5),
+(8, '비밀유지서약서', '2024-08-01 09:00:00', '박철수_비밀유지서약서', 'https://example.com/contract8.pdf', 'Y', 3, 5),
+(9, '근로계약서', '2024-09-01 09:00:00', '이수정_근로계약서', 'https://example.com/contract9.pdf', 'N', 4, 5),
+(10, '비밀유지서약서', '2024-10-01 09:00:00', '최강욱_비밀유지서약서', 'https://example.com/contract10.pdf', 'Y', 5, 3);
 
 -- 자격증 테이블
 INSERT INTO qualification (qualification_id, qualification_name, qualification_number, qualified_at, issuer, grade_score, employee_id)
@@ -310,14 +310,14 @@ VALUES
 
 -- 휴가 신청 증빙자료 테이블 
 INSERT INTO vacation_request_file (
-   vacation_request_file_id, file_url, vacation_request_id
+   vacation_request_file_id, file_name, file_url, vacation_request_id
 )
 VALUES 
-(1, 'https://example.com/files/vacation_request_1.pdf', 1),
-(2, 'https://example.com/files/vacation_request_2.pdf', 2),
-(3, 'https://example.com/files/vacation_request_3.pdf', 3),
-(4, 'https://example.com/files/vacation_request_4.pdf', 4),
-(5, 'https://example.com/files/vacation_request_5.pdf', 5);
+(1, '홍길동_휴가_증빙자료', 'https://example.com/files/vacation_request_1.pdf', 1),
+(2, '김영희_휴가_증빙자료', 'https://example.com/files/vacation_request_2.pdf', 2),
+(3, '박철수_휴가_증빙자료', 'https://example.com/files/vacation_request_3.pdf', 3),
+(4, '이수정_휴가_증빙자료', 'https://example.com/files/vacation_request_4.pdf', 4),
+(5, '최강욱_휴가_증빙자료', 'https://example.com/files/vacation_request_5.pdf', 5);
 
 -- 연차사용촉진정책 테이블
 INSERT INTO annual_vacation_promotion_policy (
@@ -358,14 +358,14 @@ VALUES
  
  -- 근태 신청 증빙자료 테이블
  INSERT INTO attendance_request_file (
-   attendance_request_file_id, file_url, attendance_request_id
+   attendance_request_file_id, file_name, file_url, attendance_request_id
 )
 VALUES 
-(1, 'https://example.com/file1.pdf', 1),
-(2, 'https://example.com/file2.pdf', 2),
-(3, 'https://example.com/file3.pdf', 3),
-(4, 'https://example.com/file4.pdf', 4),
-(5, 'https://example.com/file5.pdf', 5);
+(1, '근태 증빙자료1', 'https://example.com/file1.pdf', 1),
+(2, '근태 증빙자료2', 'https://example.com/file2.pdf', 2),
+(3, '근태 증빙자료3', 'https://example.com/file3.pdf', 3),
+(4, '근태 증빙자료4', 'https://example.com/file4.pdf', 4),
+(5, '근태 증빙자료5', 'https://example.com/file5.pdf', 5);
 
 -- 출퇴근 테이블
 INSERT INTO commute (

@@ -1,5 +1,3 @@
-USE inflowdb;
-
 DROP TABLE IF EXISTS monthly_employee_num_statistics;
 DROP TABLE IF EXISTS monthly_department_overtime_allowance_statistics;
 DROP TABLE IF EXISTS semiannual_department_performance_ratio_statistics;
@@ -160,6 +158,7 @@ CREATE TABLE contract (
    contract_id BIGINT PRIMARY KEY,
    contract_type VARCHAR(255) NOT NULL,
    created_at TIMESTAMP NOT NULL,
+   file_name VARCHAR(255) NOT NULL,
    file_url TEXT NOT NULL UNIQUE,
    review_status VARCHAR(255) NOT NULL DEFAULT 'N' CHECK(review_status IN ('Y','N')),
    employee_id BIGINT NOT NULL,
@@ -302,6 +301,7 @@ CREATE TABLE vacation_request (
 
 CREATE TABLE vacation_request_file (
    vacation_request_file_id BIGINT PRIMARY KEY,
+   file_name VARCHAR(255) NOT NULL,
    file_url TEXT NOT NULL UNIQUE,
    vacation_request_id BIGINT NOT NULL,
    FOREIGN KEY (vacation_request_id) REFERENCES vacation_request(vacation_request_id)
@@ -419,6 +419,7 @@ CREATE TABLE attendance_request (
 
 CREATE TABLE attendance_request_file (
    attendance_request_file_id BIGINT PRIMARY KEY,
+   file_name VARCHAR(255) NOT NULL,
    file_url TEXT NOT NULL UNIQUE,
    attendance_request_id BIGINT NOT NULL,
    FOREIGN KEY (attendance_request_id) REFERENCES attendance_request(attendance_request_id)
