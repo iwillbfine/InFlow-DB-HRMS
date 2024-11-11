@@ -1,3 +1,5 @@
+USE inflowdb;
+
 DROP TABLE IF EXISTS monthly_employee_num_statistics;
 DROP TABLE IF EXISTS monthly_department_overtime_allowance_statistics;
 DROP TABLE IF EXISTS semiannual_department_performance_ratio_statistics;
