@@ -1,7 +1,7 @@
 -- 회사 테이블
 INSERT INTO company (company_id, company_name, ceo, business_registration_number, company_address, company_phone_number, company_stamp_url)
 VALUES
-(1, '파도파도', '윤채연', '서울특별시 동작구 보라매로 87', '서울 동작구 보라매로 87', '02-1234-5678', 'https://example.com/company-stamp.jpg'); 
+(1, '파도파도', '윤채연', '229-81-30104', '서울 동작구 보라매로 87', '02-1234-5678', 'https://example.com/company-stamp.jpg'); 
 
 -- 부서 테이블
 INSERT INTO department (department_code, department_name, created_at, disbanded_at, min_employee_num, upper_department_code)
