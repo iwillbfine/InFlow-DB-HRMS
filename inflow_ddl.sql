@@ -1,12 +1,13 @@
 DROP TABLE IF EXISTS monthly_employee_num_statistics;
 DROP TABLE IF EXISTS monthly_department_overtime_allowance_statistics;
 DROP TABLE IF EXISTS semiannual_department_performance_ratio_statistics;
-DROP TABLE IF EXISTS task;
 DROP TABLE IF EXISTS feedback;
+DROP TABLE IF EXISTS task;
 DROP TABLE IF EXISTS evaluation;
-DROP TABLE IF EXISTS evaluation_policy;
-DROP TABLE IF EXISTS task_type;
 DROP TABLE IF EXISTS grade;
+DROP TABLE IF EXISTS evaluation_policy;
+DROP TABLE IF EXISTS task_item;
+DROP TABLE IF EXISTS task_type;
 DROP TABLE IF EXISTS business_trip;
 DROP TABLE IF EXISTS leave_return;
 DROP TABLE IF EXISTS commute;
@@ -461,14 +462,20 @@ CREATE TABLE business_trip (
    FOREIGN KEY (attendance_request_id) REFERENCES attendance_request(attendance_request_id)
 );
 
-CREATE TABLE grade (
-   grade_id BIGINT PRIMARY KEY AUTO_INCREMENT,
-   grade_name VARCHAR(255) NOT NULL UNIQUE
-);
+
 
 CREATE TABLE task_type (
    task_type_id BIGINT PRIMARY KEY AUTO_INCREMENT,
    task_type_name VARCHAR(255) NOT NULL UNIQUE
+);
+
+CREATE TABLE task_item (
+   task_item_id BIGINT PRIMARY KEY AUTO_INCREMENT,
+   task_name VARCHAR(255) NOT NULL,
+   task_content TEXT NOT NULL,
+   assigned_employee_count BIGINT NOT NULL,
+   task_type_id BIGINT NOT NULL,
+   FOREIGN KEY (task_type_id) REFERENCES task_type(task_type_id)
 );
 
 CREATE TABLE evaluation_policy (
@@ -477,29 +484,40 @@ CREATE TABLE evaluation_policy (
    end_date TIMESTAMP NOT NULL,
    year INT NOT NULL,
    half VARCHAR(255) NOT NULL,
-   created_at TIMESTAMP NOT NULL,
    task_ratio DOUBLE NOT NULL,
+   min_rel_eval_count BIGINT NOT NULL,
+   created_at TIMESTAMP NOT NULL,
+   modifiable_date TIMESTAMP NOT NULL,
+   policy_description TEXT NOT NULL,
    policy_register_id BIGINT NOT NULL,
    task_type_id BIGINT NOT NULL,
    FOREIGN KEY (policy_register_id) REFERENCES employee(employee_id),
    FOREIGN KEY (task_type_id) REFERENCES task_type(task_type_id)
 );
 
+CREATE TABLE grade (
+   grade_id BIGINT PRIMARY KEY AUTO_INCREMENT,
+   grade_name VARCHAR(255) NOT NULL UNIQUE,
+   grade_ratio DOUBLE NOT NULL,
+   evaluation_policy_id BIGINT NOT NULL,
+   FOREIGN KEY (evaluation_policy_id) REFERENCES evaluation_policy(evaluation_policy_id)
+);
+
 CREATE TABLE evaluation (
    evaluation_id BIGINT PRIMARY KEY AUTO_INCREMENT,
    evaluation_type VARCHAR(255) NOT NULL,
-   created_at TIMESTAMP NOT NULL,
+   final_grade VARCHAR(255) NULL,
+   final_score DOUBLE NULL,
    year INT NOT NULL,
    half VARCHAR(255) NOT NULL,
-   grade_name VARCHAR(255) NULL,
+   created_at TIMESTAMP NOT NULL,
+   modifiable_date TIMESTAMP NOT NULL,
    evaluator_id BIGINT NOT NULL,
    employee_id BIGINT NOT NULL,
    evaluation_policy_id BIGINT NOT NULL,
-   grade_id BIGINT NULL,
    FOREIGN KEY (evaluator_id) REFERENCES employee(employee_id),
    FOREIGN KEY (employee_id) REFERENCES employee(employee_id),
-   FOREIGN KEY (evaluation_policy_id) REFERENCES evaluation_policy(evaluation_policy_id),
-   FOREIGN KEY (grade_id) REFERENCES grade(grade_id)
+   FOREIGN KEY (evaluation_policy_id) REFERENCES evaluation_policy(evaluation_policy_id)
 );
 
 CREATE TABLE feedback (
@@ -514,12 +532,18 @@ CREATE TABLE task (
    task_id BIGINT PRIMARY KEY AUTO_INCREMENT,
    task_name VARCHAR(255) NOT NULL,
    content TEXT NOT NULL,
-   score BIGINT NULL,
+   score DOUBLE NULL,
+   set_ratio DOUBLE NOT NULL,
+   task_grade VARCHAR(255) NULL,
+   performance_input TEXT NULL,
    created_at TIMESTAMP NOT NULL,
+   rel_eval_status BOOLEAN NOT NULL,
    evaluation_id BIGINT NOT NULL,
    task_type_id BIGINT NOT NULL,
+   task_item_id BIGINT NOT NULL,
    FOREIGN KEY (evaluation_id) REFERENCES evaluation(evaluation_id),
-   FOREIGN KEY (task_type_id) REFERENCES task_type(task_type_id)
+   FOREIGN KEY (task_type_id) REFERENCES task_type(task_type_id),
+  FOREIGN KEY (task_item_id) REFERENCES task_item(task_item_id)
 );
 
 CREATE TABLE semiannual_department_performance_ratio_statistics (
