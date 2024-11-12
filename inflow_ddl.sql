@@ -2,7 +2,7 @@ DROP TABLE IF EXISTS monthly_employee_num_statistics;
 DROP TABLE IF EXISTS monthly_department_overtime_allowance_statistics;
 DROP TABLE IF EXISTS semiannual_department_performance_ratio_statistics;
 DROP TABLE IF EXISTS feedback;
-DROP TABLE IF EXISTS task;
+DROP TABLE IF EXISTS task_eval;
 DROP TABLE IF EXISTS evaluation;
 DROP TABLE IF EXISTS grade;
 DROP TABLE IF EXISTS evaluation_policy;
@@ -529,22 +529,23 @@ CREATE TABLE feedback (
    FOREIGN KEY (evaluation_id) REFERENCES evaluation(evaluation_id)
 );
 
-CREATE TABLE task (
-   task_id BIGINT PRIMARY KEY AUTO_INCREMENT,
-   task_name VARCHAR(255) NOT NULL,
-   content TEXT NOT NULL,
-   score DOUBLE NULL,
+CREATE TABLE task_eval (
+   task_eval_id BIGINT PRIMARY KEY AUTO_INCREMENT,
+   task_eval_name VARCHAR(255) NOT NULL,
+   task_eval_content TEXT NOT NULL,
+   score DOUBLE NOT NULL,
    set_ratio DOUBLE NOT NULL,
-   task_grade VARCHAR(255) NULL,
-   performance_input TEXT NULL,
+   task_grade VARCHAR(255) NOT NULL,
+   performance_input TEXT NOT NULL,
    created_at TIMESTAMP NOT NULL,
    rel_eval_status BOOLEAN NOT NULL,
    evaluation_id BIGINT NOT NULL,
+   modifiable_date TIMESTAMP NOT NULL,
    task_type_id BIGINT NOT NULL,
    task_item_id BIGINT NOT NULL,
    FOREIGN KEY (evaluation_id) REFERENCES evaluation(evaluation_id),
    FOREIGN KEY (task_type_id) REFERENCES task_type(task_type_id),
-  FOREIGN KEY (task_item_id) REFERENCES task_item(task_item_id)
+   FOREIGN KEY (task_item_id) REFERENCES task_item(task_item_id)
 );
 
 CREATE TABLE semiannual_department_performance_ratio_statistics (
