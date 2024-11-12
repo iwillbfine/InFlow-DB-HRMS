@@ -498,7 +498,8 @@ CREATE TABLE evaluation_policy (
 CREATE TABLE grade (
    grade_id BIGINT PRIMARY KEY AUTO_INCREMENT,
    grade_name VARCHAR(255) NOT NULL UNIQUE,
-   grade_ratio DOUBLE NOT NULL,
+   start_ratio DOUBLE NOT NULL,
+   end_ratio DOUBLE NOT NULL,
    evaluation_policy_id BIGINT NOT NULL,
    FOREIGN KEY (evaluation_policy_id) REFERENCES evaluation_policy(evaluation_policy_id)
 );
