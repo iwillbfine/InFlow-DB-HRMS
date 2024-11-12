@@ -266,13 +266,13 @@ VALUES
 (5, '특별휴가');
 
 -- 휴가 정책 테이블
-INSERT INTO vacation_policy (vacation_policy_id, vacation_policy_name, allocation_days, paid_status, year, created_at, auto_allocation_cycle, vacation_type_id, policy_register_id)
+INSERT INTO vacation_policy (vacation_policy_id, vacation_policy_name, vacation_policy_description, allocation_days, paid_status, year, created_at, auto_allocation_cycle, vacation_type_id, policy_register_id)
 VALUES
-(1, '2024 연차 정책', 15, 'Y', 2024, '2024-01-01 00:00:00', '1Y', 1, 5),
-(2, '2024 공가 정책', 5, 'Y', 2024, '2024-01-01 00:00:00', NULL, 2, 5),
-(3, '2024 병가 정책', 10, 'Y', 2024, '2024-01-01 00:00:00', NULL, 3, 5),
-(4, '2024 포상휴가 정책', 3, 'Y', 2024, '2024-01-01 00:00:00', NULL, 4, 5),
-(5, '2024 특별휴가 정책', 7, 'N', 2024, '2024-01-01 00:00:00', NULL, 5, 5);
+(1, '2024 연차 정책', '2024년 연차는 1년 이상 근속한 사원에게 15일씩 자동 지급됩니다.', 15, 'Y', 2024, '2024-01-01 00:00:00', '1Y', 1, 5),
+(2, '2024 공가 정책', '공가는 증빙자료가 있어야 지급 가능합니다.', 5, 'Y', 2024, '2024-01-01 00:00:00', NULL, 2, 5),
+(3, '2024 병가 정책', '병가는 진료확인서가 있어야 지급 가능합니다.', 10, 'Y', 2024, '2024-01-01 00:00:00', NULL, 3, 5),
+(4, '2024 포상휴가 정책', '2024년 포상휴가는 최대 3일까지 지급 가능합니다.', 3, 'Y', 2024, '2024-01-01 00:00:00', NULL, 4, 5),
+(5, '2024 특별휴가 정책', '2024년 특별휴가는 최대 7일까지 지급 가능합니다.', 7, 'N', 2024, '2024-01-01 00:00:00', NULL, 5, 5);
 
 -- 휴가 테이블
 INSERT INTO vacation (
@@ -329,14 +329,14 @@ VALUES
 
 -- 근태 신청 유형 테이블
 INSERT INTO attendance_request_type (
-   attendance_request_type_id, attendance_request_type_name
+   attendance_request_type_id, attendance_request_type_name, attendance_request_type_description
 )
 VALUES 
-(1, '재택근무'),
-(2, '초과근무'),
-(3, '출장'),
-(4, '파견'),
-(5, '휴직');
+(1, '재택근무', '선재택 후승인'),
+(2, '초과근무', '초과근무는 30분 간격으로 연장이 가능합니다.'),
+(3, '출장', '출장을 가시려면 출장전에 출장 신청하시고, 신청 승인받으셔야 합니다.'),
+(4, '파견', '파견을 가시려면 파견 전에 파견 신청하시고, 신청 승인받으셔야 합니다.'),
+(5, '휴직', '휴직을 하려면 휴직 신청 후, 신청 승인받으셔야 합니다');
 
 -- 근태 신청 테이블
 INSERT INTO attendance_request (

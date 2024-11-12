@@ -255,6 +255,7 @@ CREATE TABLE vacation_type (
 CREATE TABLE vacation_policy (
    vacation_policy_id BIGINT PRIMARY KEY AUTO_INCREMENT,
    vacation_policy_name VARCHAR(255) NOT NULL,
+   vacation_policy_description TEXT NOT NULL,
    allocation_days BIGINT NOT NULL,
    paid_status VARCHAR(255) NOT NULL DEFAULT 'N' CHECK(paid_status IN ('Y', 'N')),
    year INT NOT NULL,
@@ -396,7 +397,8 @@ CREATE TABLE payment (
 
 CREATE TABLE attendance_request_type (
    attendance_request_type_id BIGINT PRIMARY KEY AUTO_INCREMENT,
-   attendance_request_type_name VARCHAR(255) NOT NULL UNIQUE
+   attendance_request_type_name VARCHAR(255) NOT NULL UNIQUE,
+   attendance_request_type_description TEXT NOT NULL
 );
 
 CREATE TABLE attendance_request (
