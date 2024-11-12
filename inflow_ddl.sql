@@ -124,7 +124,7 @@ CREATE TABLE family_relationship (
 );
 
 CREATE TABLE family_member (
-   family_member_id BIGINT PRIMARY KEY,
+   family_member_id BIGINT PRIMARY KEY AUTO_INCREMENT,
    name VARCHAR(255) NOT NULL,
    birth_date DATETIME NOT NULL,
    employee_id BIGINT NOT NULL,
