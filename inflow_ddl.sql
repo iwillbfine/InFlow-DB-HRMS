@@ -1,14 +1,14 @@
-USE inflowdb;
-
 DROP TABLE IF EXISTS monthly_employee_num_statistics;
 DROP TABLE IF EXISTS monthly_department_overtime_allowance_statistics;
 DROP TABLE IF EXISTS semiannual_department_performance_ratio_statistics;
-DROP TABLE IF EXISTS task;
 DROP TABLE IF EXISTS feedback;
+DROP TABLE IF EXISTS task; -- 이전 테이블1
+DROP TABLE IF EXISTS task_eval;
 DROP TABLE IF EXISTS evaluation;
-DROP TABLE IF EXISTS evaluation_policy;
-DROP TABLE IF EXISTS task_type;
 DROP TABLE IF EXISTS grade;
+DROP TABLE IF EXISTS evaluation_policy;
+DROP TABLE IF EXISTS task_item;
+DROP TABLE IF EXISTS task_type;
 DROP TABLE IF EXISTS business_trip;
 DROP TABLE IF EXISTS leave_return;
 DROP TABLE IF EXISTS commute;
@@ -49,7 +49,7 @@ DROP TABLE IF EXISTS department;
 DROP TABLE IF EXISTS company;
 
 CREATE TABLE company (
-	company_id BIGINT PRIMARY KEY,
+	company_id BIGINT PRIMARY KEY AUTO_INCREMENT,
 	company_name VARCHAR(255) NOT NULL,
 	ceo VARCHAR(255) NOT NULL,
 	business_registration_number VARCHAR(255) NOT NULL,
@@ -89,14 +89,14 @@ CREATE TABLE duty (
 );
 
 CREATE TABLE employee (
-   employee_id BIGINT PRIMARY KEY,
+   employee_id BIGINT PRIMARY KEY AUTO_INCREMENT,
    employee_number VARCHAR(255) NOT NULL UNIQUE,
    password VARCHAR(255) NOT NULL,
    gender VARCHAR(255) NOT NULL CHECK(gender IN ('MALE', 'FEMALE')),
    name VARCHAR(255) NOT NULL,
    birth_date DATETIME NOT NULL,
-   resident_registration_number VARCHAR(255) NOT NULL UNIQUE,
-   email VARCHAR(255) NOT NULL UNIQUE,
+   resident_registration_number VARCHAR(255) NOT NULL,
+   email VARCHAR(255) NOT NULL,
    phone_number VARCHAR(255) NOT NULL,
    profile_img_url TEXT NOT NULL,
    join_date TIMESTAMP NOT NULL,
@@ -126,7 +126,7 @@ CREATE TABLE family_relationship (
 );
 
 CREATE TABLE family_member (
-   family_member_id BIGINT PRIMARY KEY,
+   family_member_id BIGINT PRIMARY KEY AUTO_INCREMENT,
    name VARCHAR(255) NOT NULL,
    birth_date DATETIME NOT NULL,
    employee_id BIGINT NOT NULL,
@@ -136,7 +136,7 @@ CREATE TABLE family_member (
 );
 
 CREATE TABLE education (
-   education_id BIGINT PRIMARY KEY,
+   education_id BIGINT PRIMARY KEY AUTO_INCREMENT,
    school_name VARCHAR(255) NOT NULL,
    admission_date TIMESTAMP NOT NULL,
    graduation_date TIMESTAMP NOT NULL,
@@ -147,7 +147,7 @@ CREATE TABLE education (
 );
 
 CREATE TABLE career (
-   career_id BIGINT PRIMARY KEY,
+   career_id BIGINT PRIMARY KEY AUTO_INCREMENT,
    company_name VARCHAR(255) NOT NULL,
    role_name VARCHAR(255) NOT NULL,
    join_date TIMESTAMP NOT NULL,
@@ -157,9 +157,10 @@ CREATE TABLE career (
 );
 
 CREATE TABLE contract (
-   contract_id BIGINT PRIMARY KEY,
+   contract_id BIGINT PRIMARY KEY AUTO_INCREMENT,
    contract_type VARCHAR(255) NOT NULL,
    created_at TIMESTAMP NOT NULL,
+   file_name VARCHAR(255) NOT NULL,
    file_url TEXT NOT NULL UNIQUE,
    review_status VARCHAR(255) NOT NULL DEFAULT 'N' CHECK(review_status IN ('Y','N')),
    employee_id BIGINT NOT NULL,
@@ -169,7 +170,7 @@ CREATE TABLE contract (
 );
 
 CREATE TABLE qualification (
-   qualification_id BIGINT PRIMARY KEY,
+   qualification_id BIGINT PRIMARY KEY AUTO_INCREMENT,
    qualification_name VARCHAR(255) NOT NULL,
    qualification_number VARCHAR(255) NOT NULL UNIQUE,
    qualified_at TIMESTAMP NOT NULL,
@@ -185,7 +186,7 @@ CREATE TABLE `language` (
 );
 
 CREATE TABLE language_test (
-   language_test_id BIGINT PRIMARY KEY,
+   language_test_id BIGINT PRIMARY KEY AUTO_INCREMENT,
    language_test_name VARCHAR(255) NOT NULL,
    qualification_number VARCHAR(255) NOT NULL UNIQUE,
    issuer VARCHAR(255) NOT NULL,
@@ -198,7 +199,7 @@ CREATE TABLE language_test (
 );
 
 CREATE TABLE discipline_reward (
-   discipline_reward_id BIGINT PRIMARY KEY,
+   discipline_reward_id BIGINT PRIMARY KEY AUTO_INCREMENT,
    discipline_reward_name VARCHAR(255) NOT NULL,
    content VARCHAR(255) NOT NULL,
    created_at TIMESTAMP NOT NULL,
@@ -207,7 +208,7 @@ CREATE TABLE discipline_reward (
 );
 
 CREATE TABLE appointment (
-   appointment_id BIGINT PRIMARY KEY,
+   appointment_id BIGINT PRIMARY KEY AUTO_INCREMENT,
    appointed_at TIMESTAMP NOT NULL,
    employee_id BIGINT NOT NULL,
    authorizer_id BIGINT NOT NULL,
@@ -224,7 +225,7 @@ CREATE TABLE appointment (
 );
 
 CREATE TABLE checklist (
-   checklist_id BIGINT PRIMARY KEY,
+   checklist_id BIGINT PRIMARY KEY AUTO_INCREMENT,
    content VARCHAR(255) NOT NULL,
    check_status VARCHAR(255) NOT NULL DEFAULT 'N' CHECK(check_status IN ('Y', 'N')),
    created_at TIMESTAMP NOT NULL,
@@ -233,11 +234,11 @@ CREATE TABLE checklist (
 );
 
 CREATE TABLE department_member (
-   department_member_id BIGINT PRIMARY KEY,
+   department_member_id BIGINT PRIMARY KEY AUTO_INCREMENT,
    employee_number VARCHAR(255) NOT NULL UNIQUE,
    name VARCHAR(255) NOT NULL,
    role_name VARCHAR(255) NOT NULL,
-   email VARCHAR(255) NOT NULL UNIQUE,
+   email VARCHAR(255) NOT NULL,
    profile_img_url TEXT NOT NULL,
    phone_number VARCHAR(255) NOT NULL,
    attendance_status_type_name VARCHAR(255) NOT NULL,
@@ -249,13 +250,14 @@ CREATE TABLE department_member (
 );
 
 CREATE TABLE vacation_type (
-   vacation_type_id BIGINT PRIMARY KEY,
+   vacation_type_id BIGINT PRIMARY KEY AUTO_INCREMENT,
    vacation_type_name VARCHAR(255) NOT NULL UNIQUE
 );
 
 CREATE TABLE vacation_policy (
-   vacation_policy_id BIGINT PRIMARY KEY,
+   vacation_policy_id BIGINT PRIMARY KEY AUTO_INCREMENT,
    vacation_policy_name VARCHAR(255) NOT NULL,
+   vacation_policy_description TEXT NOT NULL,
    allocation_days BIGINT NOT NULL,
    paid_status VARCHAR(255) NOT NULL DEFAULT 'N' CHECK(paid_status IN ('Y', 'N')),
    year INT NOT NULL,
@@ -268,7 +270,7 @@ CREATE TABLE vacation_policy (
 );
 
 CREATE TABLE vacation (
-   vacation_id BIGINT PRIMARY KEY,
+   vacation_id BIGINT PRIMARY KEY AUTO_INCREMENT,
    vacation_name VARCHAR(255) NOT NULL,
    vacation_left BIGINT NOT NULL,
    vacation_used BIGINT NOT NULL DEFAULT 0,
@@ -284,7 +286,7 @@ CREATE TABLE vacation (
 );
 
 CREATE TABLE vacation_request (
-   vacation_request_id BIGINT PRIMARY KEY,
+   vacation_request_id BIGINT PRIMARY KEY AUTO_INCREMENT,
    start_date TIMESTAMP NOT NULL,
    end_date TIMESTAMP NOT NULL,
 	created_at TIMESTAMP NOT NULL,
@@ -301,21 +303,22 @@ CREATE TABLE vacation_request (
 );
 
 CREATE TABLE vacation_request_file (
-   vacation_request_file_id BIGINT PRIMARY KEY,
+   vacation_request_file_id BIGINT PRIMARY KEY AUTO_INCREMENT,
+   file_name VARCHAR(255) NOT NULL,
    file_url TEXT NOT NULL UNIQUE,
    vacation_request_id BIGINT NOT NULL,
    FOREIGN KEY (vacation_request_id) REFERENCES vacation_request(vacation_request_id)
 );
 
 CREATE TABLE annual_vacation_promotion_policy (
-   annual_vacation_promotion_policy_id BIGINT PRIMARY KEY,
+   annual_vacation_promotion_policy_id BIGINT PRIMARY KEY AUTO_INCREMENT,
    month INT NOT NULL,
    day INT NOT NULL,
    standard INT NOT NULL
 );
 
 CREATE TABLE earned_income_tax (
-   earned_income_tax_id BIGINT PRIMARY KEY,
+   earned_income_tax_id BIGINT PRIMARY KEY AUTO_INCREMENT,
    monthly_salary_more BIGINT NOT NULL,
    monthly_salary_under BIGINT NOT NULL,
    child_num INT NOT NULL,
@@ -323,39 +326,39 @@ CREATE TABLE earned_income_tax (
 );
 
 CREATE TABLE major_insurance (
-   major_insurance_id BIGINT PRIMARY KEY,
+   major_insurance_id BIGINT PRIMARY KEY AUTO_INCREMENT,
    insurance_name VARCHAR(255) NOT NULL,
    tax_rates DOUBLE NOT NULL
 );
 
 CREATE TABLE non_taxable (
-   non_taxable_id BIGINT PRIMARY KEY,
+   non_taxable_id BIGINT PRIMARY KEY AUTO_INCREMENT,
    non_taxable_name VARCHAR(255) NOT NULL,
    amount BIGINT NOT NULL
 );
 
 CREATE TABLE tax_credit (
-   tax_credit_id BIGINT PRIMARY KEY,
+   tax_credit_id BIGINT PRIMARY KEY AUTO_INCREMENT,
    valid_child_num INT NOT NULL,
    base_deductible BIGINT NOT NULL,
    additional_deductible_per_child BIGINT NOT NULL
 );
 
 CREATE TABLE public_holiday (
-   public_holiday_id BIGINT PRIMARY KEY,
+   public_holiday_id BIGINT PRIMARY KEY AUTO_INCREMENT,
    year INT NOT NULL,
    month INT NOT NULL,
    day_num INT NOT NULL
 );
 
 CREATE TABLE irregular_allowance (
-   irregular_allowance_id BIGINT PRIMARY KEY,
+   irregular_allowance_id BIGINT PRIMARY KEY AUTO_INCREMENT,
    irregular_allowance_name VARCHAR(255) NOT NULL,
    amount BIGINT NOT NULL
 );
 
 CREATE TABLE payment (
-   payment_id VARCHAR(255) PRIMARY KEY,
+   payment_id BIGINT PRIMARY KEY AUTO_INCREMENT,
    paid_at TIMESTAMP NOT NULL,
    monthly_salary BIGINT NOT NULL,
    actual_salary BIGINT NOT NULL,
@@ -395,12 +398,13 @@ CREATE TABLE payment (
 );
 
 CREATE TABLE attendance_request_type (
-   attendance_request_type_id BIGINT PRIMARY KEY,
-   attendance_request_type_name VARCHAR(255) NOT NULL UNIQUE
+   attendance_request_type_id BIGINT PRIMARY KEY AUTO_INCREMENT,
+   attendance_request_type_name VARCHAR(255) NOT NULL UNIQUE,
+   attendance_request_type_description TEXT NOT NULL
 );
 
 CREATE TABLE attendance_request (
-   attendance_request_id BIGINT PRIMARY KEY,
+   attendance_request_id BIGINT PRIMARY KEY AUTO_INCREMENT,
    request_reason VARCHAR(255) NOT NULL,
    start_date TIMESTAMP NOT NULL,
    end_date TIMESTAMP NOT NULL,
@@ -418,14 +422,15 @@ CREATE TABLE attendance_request (
 );
 
 CREATE TABLE attendance_request_file (
-   attendance_request_file_id BIGINT PRIMARY KEY,
+   attendance_request_file_id BIGINT PRIMARY KEY AUTO_INCREMENT,
+   file_name VARCHAR(255) NOT NULL,
    file_url TEXT NOT NULL UNIQUE,
    attendance_request_id BIGINT NOT NULL,
    FOREIGN KEY (attendance_request_id) REFERENCES attendance_request(attendance_request_id)
 );
 
 CREATE TABLE commute (
-   commute_id BIGINT PRIMARY KEY,
+   commute_id BIGINT PRIMARY KEY AUTO_INCREMENT,
    start_time TIMESTAMP NOT NULL,
    end_time TIMESTAMP NULL,
    remote_status VARCHAR(255) NOT NULL DEFAULT 'N' CHECK(remote_status IN ('Y', 'N')),
@@ -437,7 +442,7 @@ CREATE TABLE commute (
 );
 
 CREATE TABLE leave_return (
-   leave_return_id BIGINT PRIMARY KEY,
+   leave_return_id BIGINT PRIMARY KEY AUTO_INCREMENT,
    start_date TIMESTAMP NOT NULL,
    end_date TIMESTAMP NOT NULL,
    employee_id BIGINT NOT NULL,
@@ -447,7 +452,7 @@ CREATE TABLE leave_return (
 );
 
 CREATE TABLE business_trip (
-   business_trip_id BIGINT PRIMARY KEY,
+   business_trip_id BIGINT PRIMARY KEY AUTO_INCREMENT,
    start_date TIMESTAMP NOT NULL,
    end_date TIMESTAMP NOT NULL,
    trip_type VARCHAR(255) NOT NULL CHECK(trip_type IN ('BUSINESS', 'DISPATCH')),
@@ -458,69 +463,94 @@ CREATE TABLE business_trip (
    FOREIGN KEY (attendance_request_id) REFERENCES attendance_request(attendance_request_id)
 );
 
-CREATE TABLE grade (
-   grade_id BIGINT PRIMARY KEY,
-   grade_name VARCHAR(255) NOT NULL UNIQUE
-);
+
 
 CREATE TABLE task_type (
-   task_type_id BIGINT PRIMARY KEY,
+   task_type_id BIGINT PRIMARY KEY AUTO_INCREMENT,
    task_type_name VARCHAR(255) NOT NULL UNIQUE
 );
 
+CREATE TABLE task_item (
+   task_item_id BIGINT PRIMARY KEY AUTO_INCREMENT,
+   task_name VARCHAR(255) NOT NULL,
+   task_content TEXT NOT NULL,
+   assigned_employee_count BIGINT NOT NULL,
+   task_type_id BIGINT NOT NULL,
+   FOREIGN KEY (task_type_id) REFERENCES task_type(task_type_id)
+);
+
 CREATE TABLE evaluation_policy (
-   evaluation_policy_id BIGINT PRIMARY KEY,
+   evaluation_policy_id BIGINT PRIMARY KEY AUTO_INCREMENT,
    start_date TIMESTAMP NOT NULL,
    end_date TIMESTAMP NOT NULL,
    year INT NOT NULL,
    half VARCHAR(255) NOT NULL,
-   created_at TIMESTAMP NOT NULL,
    task_ratio DOUBLE NOT NULL,
+   min_rel_eval_count BIGINT NOT NULL,
+   created_at TIMESTAMP NOT NULL,
+   modifiable_date TIMESTAMP NOT NULL,
+   policy_description TEXT NOT NULL,
    policy_register_id BIGINT NOT NULL,
    task_type_id BIGINT NOT NULL,
    FOREIGN KEY (policy_register_id) REFERENCES employee(employee_id),
    FOREIGN KEY (task_type_id) REFERENCES task_type(task_type_id)
 );
 
+CREATE TABLE grade (
+   grade_id BIGINT PRIMARY KEY AUTO_INCREMENT,
+   grade_name VARCHAR(255) NOT NULL UNIQUE,
+   start_ratio DOUBLE NOT NULL,
+   end_ratio DOUBLE NOT NULL,
+   evaluation_policy_id BIGINT NOT NULL,
+   FOREIGN KEY (evaluation_policy_id) REFERENCES evaluation_policy(evaluation_policy_id)
+);
+
 CREATE TABLE evaluation (
-   evaluation_id BIGINT PRIMARY KEY,
+   evaluation_id BIGINT PRIMARY KEY AUTO_INCREMENT,
    evaluation_type VARCHAR(255) NOT NULL,
-   created_at TIMESTAMP NOT NULL,
+   final_grade VARCHAR(255) NULL,
+   final_score DOUBLE NULL,
    year INT NOT NULL,
    half VARCHAR(255) NOT NULL,
-   grade_name VARCHAR(255) NULL,
+   created_at TIMESTAMP NOT NULL,
+   modifiable_date TIMESTAMP NOT NULL,
    evaluator_id BIGINT NOT NULL,
    employee_id BIGINT NOT NULL,
    evaluation_policy_id BIGINT NOT NULL,
-   grade_id BIGINT NULL,
    FOREIGN KEY (evaluator_id) REFERENCES employee(employee_id),
    FOREIGN KEY (employee_id) REFERENCES employee(employee_id),
-   FOREIGN KEY (evaluation_policy_id) REFERENCES evaluation_policy(evaluation_policy_id),
-   FOREIGN KEY (grade_id) REFERENCES grade(grade_id)
+   FOREIGN KEY (evaluation_policy_id) REFERENCES evaluation_policy(evaluation_policy_id)
 );
 
 CREATE TABLE feedback (
-   feedback_id BIGINT PRIMARY KEY,
+   feedback_id BIGINT PRIMARY KEY AUTO_INCREMENT,
    content TEXT NOT NULL,
    created_at TIMESTAMP NOT NULL,
    evaluation_id BIGINT NOT NULL,
    FOREIGN KEY (evaluation_id) REFERENCES evaluation(evaluation_id)
 );
 
-CREATE TABLE task (
-   task_id BIGINT PRIMARY KEY,
-   task_name VARCHAR(255) NOT NULL,
-   content TEXT NOT NULL,
-   score BIGINT NULL,
+CREATE TABLE task_eval (
+   task_eval_id BIGINT PRIMARY KEY AUTO_INCREMENT,
+   task_eval_name VARCHAR(255) NOT NULL,
+   task_eval_content TEXT NOT NULL,
+   score DOUBLE NOT NULL,
+   set_ratio DOUBLE NOT NULL,
+   task_grade VARCHAR(255) NOT NULL,
+   performance_input TEXT NOT NULL,
    created_at TIMESTAMP NOT NULL,
+   rel_eval_status BOOLEAN NOT NULL,
    evaluation_id BIGINT NOT NULL,
+   modifiable_date TIMESTAMP NOT NULL,
    task_type_id BIGINT NOT NULL,
+   task_item_id BIGINT NOT NULL,
    FOREIGN KEY (evaluation_id) REFERENCES evaluation(evaluation_id),
-   FOREIGN KEY (task_type_id) REFERENCES task_type(task_type_id)
+   FOREIGN KEY (task_type_id) REFERENCES task_type(task_type_id),
+   FOREIGN KEY (task_item_id) REFERENCES task_item(task_item_id)
 );
 
 CREATE TABLE semiannual_department_performance_ratio_statistics (
-   statistics_inflowdbid BIGINT PRIMARY KEY,
+   statistics_id BIGINT PRIMARY KEY AUTO_INCREMENT,
    year INT NOT NULL,
    half VARCHAR(255) NOT NULL,
    performance_ratio DOUBLE NOT NULL,
@@ -530,7 +560,7 @@ CREATE TABLE semiannual_department_performance_ratio_statistics (
 );
 
 CREATE TABLE monthly_department_overtime_allowance_statistics (
-   statistics_id BIGINT PRIMARY KEY,
+   statistics_id BIGINT PRIMARY KEY AUTO_INCREMENT,
    year INT NOT NULL,
    month INT NOT NULL,
    total_amount BIGINT NOT NULL,
@@ -540,7 +570,7 @@ CREATE TABLE monthly_department_overtime_allowance_statistics (
 );
 
 CREATE TABLE monthly_employee_num_statistics (
-   statistics_id BIGINT PRIMARY KEY,
+   statistics_id BIGINT PRIMARY KEY AUTO_INCREMENT,
    year INT NOT NULL,
    month INT NOT NULL,
    half VARCHAR(255) NOT NULL,
