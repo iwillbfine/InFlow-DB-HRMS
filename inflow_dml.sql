@@ -393,12 +393,3 @@ VALUES
 (1, '2024-11-12 09:00:00', '2024-12-12 18:00:00', 'DISPATCH', '부산 사무소', 4, 4);
 
 -- 
-INSERT INTO grade (
-   grade_id, grade_name
-)
-VALUES 
-(1, 'S'),
-(2, 'A'),
-(3, 'B'),
-(4, 'C'),
-(5, 'D');
