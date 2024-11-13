@@ -29,7 +29,7 @@ DROP TABLE IF EXISTS vacation;
 DROP TABLE IF EXISTS vacation_policy;
 DROP TABLE IF EXISTS vacation_type;
 DROP TABLE IF EXISTS department_member;
-DROP TABLE IF EXISTS checklist;
+DROP TABLE IF EXISTS appointment_item;
 DROP TABLE IF EXISTS appointment;
 DROP TABLE IF EXISTS discipline_reward;
 DROP TABLE IF EXISTS language_test;
@@ -48,6 +48,7 @@ DROP TABLE IF EXISTS attendance_status_type;
 DROP TABLE IF EXISTS department;
 DROP TABLE IF EXISTS company;
 
+-- 회사 테이블
 CREATE TABLE company (
 	company_id BIGINT PRIMARY KEY AUTO_INCREMENT,
 	company_name VARCHAR(255) NOT NULL,
@@ -58,6 +59,7 @@ CREATE TABLE company (
 	company_stamp_url TEXT NOT NULL
 );
 
+-- 부서 테이블
 CREATE TABLE department (
    department_code VARCHAR(255) PRIMARY KEY,
    department_name VARCHAR(255) NOT NULL,
@@ -68,26 +70,31 @@ CREATE TABLE department (
    FOREIGN KEY (upper_department_code) REFERENCES department(department_code)
 );
 
+-- 출퇴근 상태 유형 테이블
 CREATE TABLE attendance_status_type (
    attendance_status_type_code VARCHAR(255) PRIMARY KEY,
    attendance_status_type_name VARCHAR(255) NOT NULL UNIQUE
 );
 
+-- 직위 테이블
 CREATE TABLE `position` (
    position_code VARCHAR(255) PRIMARY KEY,
    position_name VARCHAR(255) NOT NULL UNIQUE
 );
 
+-- 직위 테이블
 CREATE TABLE `role` (
    role_code VARCHAR(255) PRIMARY KEY,
    role_name VARCHAR(255) NOT NULL UNIQUE
 );
 
+-- 직무 테이블
 CREATE TABLE duty (
    duty_code VARCHAR(255) PRIMARY KEY,
    duty_name VARCHAR(255) NOT NULL UNIQUE
 );
 
+-- 직원 테이블
 CREATE TABLE employee (
    employee_id BIGINT PRIMARY KEY AUTO_INCREMENT,
    employee_number VARCHAR(255) NOT NULL UNIQUE,
@@ -120,11 +127,13 @@ CREATE TABLE employee (
    FOREIGN KEY (duty_code) REFERENCES duty(duty_code)
 );
 
+-- 가족 구성원 테이블
 CREATE TABLE family_relationship (
    family_relationship_code VARCHAR(255) PRIMARY KEY,
    family_relationship_name VARCHAR(255) NOT NULL UNIQUE
 );
 
+-- 가구원 관계 테이블
 CREATE TABLE family_member (
    family_member_id BIGINT PRIMARY KEY AUTO_INCREMENT,
    name VARCHAR(255) NOT NULL,
@@ -135,6 +144,7 @@ CREATE TABLE family_member (
    FOREIGN KEY (family_relationship_code) REFERENCES family_relationship(family_relationship_code)
 );
 
+-- 학력 테이블
 CREATE TABLE education (
    education_id BIGINT PRIMARY KEY AUTO_INCREMENT,
    school_name VARCHAR(255) NOT NULL,
@@ -146,6 +156,7 @@ CREATE TABLE education (
    FOREIGN KEY (employee_id) REFERENCES employee(employee_id)
 );
 
+-- 경력 테이블
 CREATE TABLE career (
    career_id BIGINT PRIMARY KEY AUTO_INCREMENT,
    company_name VARCHAR(255) NOT NULL,
@@ -156,6 +167,7 @@ CREATE TABLE career (
    FOREIGN KEY (employee_id) REFERENCES employee(employee_id)
 );
 
+-- 계약서 테이블
 CREATE TABLE contract (
    contract_id BIGINT PRIMARY KEY AUTO_INCREMENT,
    contract_type VARCHAR(255) NOT NULL,
@@ -169,6 +181,7 @@ CREATE TABLE contract (
    FOREIGN KEY (reviewer_id) REFERENCES employee(employee_id)
 );
 
+-- 자격증 테이블
 CREATE TABLE qualification (
    qualification_id BIGINT PRIMARY KEY AUTO_INCREMENT,
    qualification_name VARCHAR(255) NOT NULL,
@@ -180,11 +193,13 @@ CREATE TABLE qualification (
    FOREIGN KEY (employee_id) REFERENCES employee(employee_id)
 );
 
+-- 언어 테이블
 CREATE TABLE `language` (
    language_code VARCHAR(255) PRIMARY KEY,
    language_name VARCHAR(255) NOT NULL UNIQUE
 );
 
+-- 어학시험  테이블
 CREATE TABLE language_test (
    language_test_id BIGINT PRIMARY KEY AUTO_INCREMENT,
    language_test_name VARCHAR(255) NOT NULL,
@@ -198,6 +213,7 @@ CREATE TABLE language_test (
    FOREIGN KEY (language_code) REFERENCES `language`(language_code)
 );
 
+-- 징계/보상 테이블
 CREATE TABLE discipline_reward (
    discipline_reward_id BIGINT PRIMARY KEY AUTO_INCREMENT,
    discipline_reward_name VARCHAR(255) NOT NULL,
@@ -207,6 +223,13 @@ CREATE TABLE discipline_reward (
 	FOREIGN KEY (employee_id) REFERENCES employee(employee_id)
 );
 
+-- 인사 발령 항목 테이블
+CREATE TABLE appointment_item (
+   appointment_item_code VARCHAR(255) PRIMARY KEY,
+   appointment_item_name VARCHAR(255) NOT NULL
+);
+
+-- 인사발령 테이블
 CREATE TABLE appointment (
    appointment_id BIGINT PRIMARY KEY AUTO_INCREMENT,
    appointed_at TIMESTAMP NOT NULL,
@@ -224,15 +247,7 @@ CREATE TABLE appointment (
    FOREIGN KEY (position_code) REFERENCES `position`(position_code)
 );
 
-CREATE TABLE checklist (
-   checklist_id BIGINT PRIMARY KEY AUTO_INCREMENT,
-   content VARCHAR(255) NOT NULL,
-   check_status VARCHAR(255) NOT NULL DEFAULT 'N' CHECK(check_status IN ('Y', 'N')),
-   created_at TIMESTAMP NOT NULL,
-   employee_id BIGINT NOT NULL,
-   FOREIGN KEY (employee_id) REFERENCES employee(employee_id)   
-);
-
+-- 부서 구성원 테이블
 CREATE TABLE department_member (
    department_member_id BIGINT PRIMARY KEY AUTO_INCREMENT,
    employee_number VARCHAR(255) NOT NULL UNIQUE,
@@ -249,11 +264,13 @@ CREATE TABLE department_member (
    FOREIGN KEY (employee_id) REFERENCES employee(employee_id)
 );
 
+-- 휴가 유형 테이블
 CREATE TABLE vacation_type (
    vacation_type_id BIGINT PRIMARY KEY AUTO_INCREMENT,
    vacation_type_name VARCHAR(255) NOT NULL UNIQUE
 );
 
+-- 휴가 정책 테이블
 CREATE TABLE vacation_policy (
    vacation_policy_id BIGINT PRIMARY KEY AUTO_INCREMENT,
    vacation_policy_name VARCHAR(255) NOT NULL,
@@ -269,6 +286,7 @@ CREATE TABLE vacation_policy (
    FOREIGN KEY (policy_register_id) REFERENCES employee(employee_id)
 );
 
+-- 휴가 테이블
 CREATE TABLE vacation (
    vacation_id BIGINT PRIMARY KEY AUTO_INCREMENT,
    vacation_name VARCHAR(255) NOT NULL,
@@ -285,6 +303,7 @@ CREATE TABLE vacation (
    FOREIGN KEY (vacation_type_id) REFERENCES vacation_type(vacation_type_id)
 );
 
+-- 휴가 신청 테이블
 CREATE TABLE vacation_request (
    vacation_request_id BIGINT PRIMARY KEY AUTO_INCREMENT,
    start_date TIMESTAMP NOT NULL,
@@ -302,6 +321,7 @@ CREATE TABLE vacation_request (
    FOREIGN KEY (vacation_id) REFERENCES vacation(vacation_id)
 );
 
+-- 휴가 신청 파일 테이블
 CREATE TABLE vacation_request_file (
    vacation_request_file_id BIGINT PRIMARY KEY AUTO_INCREMENT,
    file_name VARCHAR(255) NOT NULL,
@@ -310,6 +330,7 @@ CREATE TABLE vacation_request_file (
    FOREIGN KEY (vacation_request_id) REFERENCES vacation_request(vacation_request_id)
 );
 
+-- 연차 승급 정책 테이블
 CREATE TABLE annual_vacation_promotion_policy (
    annual_vacation_promotion_policy_id BIGINT PRIMARY KEY AUTO_INCREMENT,
    month INT NOT NULL,
@@ -317,6 +338,7 @@ CREATE TABLE annual_vacation_promotion_policy (
    standard INT NOT NULL
 );
 
+-- 근로 소득세 테이블
 CREATE TABLE earned_income_tax (
    earned_income_tax_id BIGINT PRIMARY KEY AUTO_INCREMENT,
    monthly_salary_more BIGINT NOT NULL,
@@ -325,18 +347,21 @@ CREATE TABLE earned_income_tax (
    amount BIGINT NOT NULL
 );
 
+-- 주요 보험 테이블
 CREATE TABLE major_insurance (
    major_insurance_id BIGINT PRIMARY KEY AUTO_INCREMENT,
    insurance_name VARCHAR(255) NOT NULL,
    tax_rates DOUBLE NOT NULL
 );
 
+-- 비과세 항목 테이블
 CREATE TABLE non_taxable (
    non_taxable_id BIGINT PRIMARY KEY AUTO_INCREMENT,
    non_taxable_name VARCHAR(255) NOT NULL,
    amount BIGINT NOT NULL
 );
 
+-- 세액 공제 테이블
 CREATE TABLE tax_credit (
    tax_credit_id BIGINT PRIMARY KEY AUTO_INCREMENT,
    valid_child_num INT NOT NULL,
@@ -344,6 +369,7 @@ CREATE TABLE tax_credit (
    additional_deductible_per_child BIGINT NOT NULL
 );
 
+-- 공휴일 테이블
 CREATE TABLE public_holiday (
    public_holiday_id BIGINT PRIMARY KEY AUTO_INCREMENT,
    year INT NOT NULL,
@@ -351,12 +377,14 @@ CREATE TABLE public_holiday (
    day_num INT NOT NULL
 );
 
+-- 비정기 수당 테이블
 CREATE TABLE irregular_allowance (
    irregular_allowance_id BIGINT PRIMARY KEY AUTO_INCREMENT,
    irregular_allowance_name VARCHAR(255) NOT NULL,
    amount BIGINT NOT NULL
 );
 
+-- 급여 테이블
 CREATE TABLE payment (
    payment_id BIGINT PRIMARY KEY AUTO_INCREMENT,
    paid_at TIMESTAMP NOT NULL,
@@ -397,12 +425,14 @@ CREATE TABLE payment (
    FOREIGN KEY (irregular_allowance_id) REFERENCES irregular_allowance(irregular_allowance_id)
 );
 
+-- 근태 신청 유형 테이블
 CREATE TABLE attendance_request_type (
    attendance_request_type_id BIGINT PRIMARY KEY AUTO_INCREMENT,
    attendance_request_type_name VARCHAR(255) NOT NULL UNIQUE,
    attendance_request_type_description TEXT NOT NULL
 );
 
+-- 근태 신청 테이블
 CREATE TABLE attendance_request (
    attendance_request_id BIGINT PRIMARY KEY AUTO_INCREMENT,
    request_reason VARCHAR(255) NOT NULL,
@@ -421,6 +451,7 @@ CREATE TABLE attendance_request (
    FOREIGN KEY (attendance_request_type_id) REFERENCES attendance_request_type(attendance_request_type_id)
 );
 
+-- 근태 신청 파일 테이블
 CREATE TABLE attendance_request_file (
    attendance_request_file_id BIGINT PRIMARY KEY AUTO_INCREMENT,
    file_name VARCHAR(255) NOT NULL,
@@ -429,6 +460,7 @@ CREATE TABLE attendance_request_file (
    FOREIGN KEY (attendance_request_id) REFERENCES attendance_request(attendance_request_id)
 );
 
+-- 근태 기록 테이블
 CREATE TABLE commute (
    commute_id BIGINT PRIMARY KEY AUTO_INCREMENT,
    start_time TIMESTAMP NOT NULL,
@@ -441,6 +473,7 @@ CREATE TABLE commute (
    FOREIGN KEY (attendance_request_id) REFERENCES attendance_request(attendance_request_id)
 );
 
+-- 휴복직 테이블
 CREATE TABLE leave_return (
    leave_return_id BIGINT PRIMARY KEY AUTO_INCREMENT,
    start_date TIMESTAMP NOT NULL,
@@ -451,6 +484,7 @@ CREATE TABLE leave_return (
    FOREIGN KEY (attendance_request_id) REFERENCES attendance_request(attendance_request_id)
 );
 
+-- 출장 테이블
 CREATE TABLE business_trip (
    business_trip_id BIGINT PRIMARY KEY AUTO_INCREMENT,
    start_date TIMESTAMP NOT NULL,
@@ -463,13 +497,13 @@ CREATE TABLE business_trip (
    FOREIGN KEY (attendance_request_id) REFERENCES attendance_request(attendance_request_id)
 );
 
-
-
+-- 업무 유형 테이블
 CREATE TABLE task_type (
    task_type_id BIGINT PRIMARY KEY AUTO_INCREMENT,
    task_type_name VARCHAR(255) NOT NULL UNIQUE
 );
 
+-- 업무 항목 테이블
 CREATE TABLE task_item (
    task_item_id BIGINT PRIMARY KEY AUTO_INCREMENT,
    task_name VARCHAR(255) NOT NULL,
@@ -479,6 +513,7 @@ CREATE TABLE task_item (
    FOREIGN KEY (task_type_id) REFERENCES task_type(task_type_id)
 );
 
+-- 평가 정책 테이블
 CREATE TABLE evaluation_policy (
    evaluation_policy_id BIGINT PRIMARY KEY AUTO_INCREMENT,
    start_date TIMESTAMP NOT NULL,
@@ -496,6 +531,7 @@ CREATE TABLE evaluation_policy (
    FOREIGN KEY (task_type_id) REFERENCES task_type(task_type_id)
 );
 
+-- 등급 테이블
 CREATE TABLE grade (
    grade_id BIGINT PRIMARY KEY AUTO_INCREMENT,
    grade_name VARCHAR(255) NOT NULL UNIQUE,
@@ -505,6 +541,7 @@ CREATE TABLE grade (
    FOREIGN KEY (evaluation_policy_id) REFERENCES evaluation_policy(evaluation_policy_id)
 );
 
+-- 평가 테이블
 CREATE TABLE evaluation (
    evaluation_id BIGINT PRIMARY KEY AUTO_INCREMENT,
    evaluation_type VARCHAR(255) NOT NULL,
@@ -522,6 +559,7 @@ CREATE TABLE evaluation (
    FOREIGN KEY (evaluation_policy_id) REFERENCES evaluation_policy(evaluation_policy_id)
 );
 
+-- 피드백 테이블
 CREATE TABLE feedback (
    feedback_id BIGINT PRIMARY KEY AUTO_INCREMENT,
    content TEXT NOT NULL,
@@ -530,6 +568,7 @@ CREATE TABLE feedback (
    FOREIGN KEY (evaluation_id) REFERENCES evaluation(evaluation_id)
 );
 
+-- 과제별 평가 테이블
 CREATE TABLE task_eval (
    task_eval_id BIGINT PRIMARY KEY AUTO_INCREMENT,
    task_eval_name VARCHAR(255) NOT NULL,
@@ -549,6 +588,7 @@ CREATE TABLE task_eval (
    FOREIGN KEY (task_item_id) REFERENCES task_item(task_item_id)
 );
 
+-- 반기별 부서 성과 비율 통계 테이블
 CREATE TABLE semiannual_department_performance_ratio_statistics (
    statistics_id BIGINT PRIMARY KEY AUTO_INCREMENT,
    year INT NOT NULL,
@@ -559,6 +599,7 @@ CREATE TABLE semiannual_department_performance_ratio_statistics (
    FOREIGN KEY (department_code) REFERENCES department(department_code)
 );
 
+-- 월별 부서 초과 근무 수당 통계 테이블
 CREATE TABLE monthly_department_overtime_allowance_statistics (
    statistics_id BIGINT PRIMARY KEY AUTO_INCREMENT,
    year INT NOT NULL,
@@ -569,6 +610,7 @@ CREATE TABLE monthly_department_overtime_allowance_statistics (
    FOREIGN KEY (department_code) REFERENCES department(department_code)
 );
 
+-- 월별 사원수 통계 테이블
 CREATE TABLE monthly_employee_num_statistics (
    statistics_id BIGINT PRIMARY KEY AUTO_INCREMENT,
    year INT NOT NULL,

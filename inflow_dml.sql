@@ -700,6 +700,15 @@ VALUES
 (9, '포상', '특별한 기여로 사내 표창장 수여', '2024-08-30 09:00:00', 4),
 (10, '징계', '지각 반복으로 경고조치', '2024-09-10 09:00:00', 5);
 
+-- 인사발령 항목  테이블
+INSERT INTO appointment_item (appointment_item_code, appointment_item_name) VALUES
+('PROM', '승진'),
+('SPPR', '특진'),
+('TERM', '해고'),
+('DEMO', '강등'),
+('TRNS', '부서이동'),
+('RCHG', '보직변경');
+
 -- 인사발령 테이블
 INSERT INTO appointment (appointment_id, appointed_at, employee_id, authorizer_id, department_code, duty_code, role_code, position_code)
 VALUES 
@@ -708,20 +717,6 @@ VALUES
 (3, '2024-03-01 09:00:00', 3, 5, 'DP003', 'D005', 'R003', 'P003'),
 (4, '2024-04-05 09:00:00', 4, 5, 'DP004', 'D006', 'R004', 'P004'),
 (5, '2024-05-10 09:00:00', 5, 5, 'DP005', 'D007', 'R005', 'P005');
-
--- 체크리스트 테이블
-INSERT INTO checklist (checklist_id, content, check_status, created_at, employee_id)
-VALUES 
-(1, '서류 제출', 'N', '2024-01-10 09:00:00', 1),
-(2, '근로계약서 서명', 'Y', '2024-02-12 10:30:00', 1),
-(3, '비밀유지서약서 서명', 'N', '2024-03-15 14:00:00', 2),
-(4, '보안교육 이수', 'Y', '2024-04-01 11:00:00', 2),
-(5, '건강검진 결과 제출', 'N', '2024-05-18 16:00:00', 3),
-(6, '인사발령 확인', 'Y', '2024-06-20 09:30:00', 3),
-(7, '휴가 신청서 제출', 'N', '2024-07-25 10:00:00', 4),
-(8, '직무 교육 이수', 'Y', '2024-08-30 13:00:00', 4),
-(9, '연말정산 서류 제출', 'N', '2024-09-15 15:30:00', 5),
-(10, '퇴직금 수령 확인', 'Y', '2024-10-10 17:00:00', 5);
 
  -- 휴가유형 테이블
 INSERT INTO vacation_type (vacation_type_id, vacation_type_name)
@@ -872,11 +867,21 @@ SELECT * FROM career;
 SELECT * FROM education;
 SELECT * FROM family_member;
 SELECT * FROM family_relationship;
+SELECT * FROM appointment_item;
+SELECT * FROM appointment;
+SELECT * FROM attendance_status_type;
 
--- 부서 및  부서 구성원
+-- 직급, 직위, 직무
+SELECT * FROM duty;
+SELECT * FROM `role`;
+SELECT * FROM `position`;
+
+-- 부서 및  부서 구성원 및 회사
 SELECT * FROM department_member;
 SELECT * FROM department;
+SELECT * FROM company;
 
+-- 평가
 SELECT * FROM feedback;
 SELECT * FROM task_eval;
 SELECT * FROM evaluation;
@@ -884,12 +889,16 @@ SELECT * FROM grade;
 SELECT * FROM evaluation_policy;
 SELECT * FROM task_item;
 SELECT * FROM task_type;
+
+-- 근태
 SELECT * FROM business_trip;
 SELECT * FROM leave_return;
 SELECT * FROM commute;
 SELECT * FROM attendance_request_file;
 SELECT * FROM attendance_request;
 SELECT * FROM attendance_request_type;
+
+-- 급여
 SELECT * FROM payment;
 SELECT * FROM irregular_allowance;
 SELECT * FROM public_holiday;
@@ -897,18 +906,11 @@ SELECT * FROM tax_credit;
 SELECT * FROM non_taxable;
 SELECT * FROM major_insurance;
 SELECT * FROM earned_income_tax;
+
+-- 휴가
 SELECT * FROM annual_vacation_promotion_policy;
 SELECT * FROM vacation_request_file;
 SELECT * FROM vacation_request;
 SELECT * FROM vacation;
 SELECT * FROM vacation_policy;
 SELECT * FROM vacation_type;
-
-SELECT * FROM checklist;
-SELECT * FROM appointment;
-SELECT * FROM duty;
-SELECT * FROM `role`;
-SELECT * FROM `position`;
-SELECT * FROM attendance_status_type;
-SELECT * FROM department;
-SELECT * FROM company;
