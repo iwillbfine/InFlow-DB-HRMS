@@ -30,8 +30,8 @@ DROP TABLE IF EXISTS vacation;
 DROP TABLE IF EXISTS vacation_policy;
 DROP TABLE IF EXISTS vacation_type;
 DROP TABLE IF EXISTS department_member;
-DROP TABLE IF EXISTS appointment_item;
 DROP TABLE IF EXISTS appointment;
+DROP TABLE IF EXISTS appointment_item;
 DROP TABLE IF EXISTS discipline_reward;
 DROP TABLE IF EXISTS language_test;
 DROP TABLE IF EXISTS `language`;
@@ -96,9 +96,10 @@ CREATE TABLE duty (
 );
 
 -- 직원 테이블
-CREATE TABLE employee (
+CREATE TABLE employee ( 
    employee_id BIGINT PRIMARY KEY AUTO_INCREMENT,
    employee_number VARCHAR(255) NOT NULL UNIQUE,
+   employee_role VARCHAR(255) NOT NULL CHECK(employee_role IN ('EMPLOYEE', 'ADMIN')),
    password VARCHAR(255) NOT NULL,
    gender VARCHAR(255) NOT NULL CHECK(gender IN ('MALE', 'FEMALE')),
    name VARCHAR(255) NOT NULL,
@@ -240,12 +241,14 @@ CREATE TABLE appointment (
    duty_code VARCHAR(255) NOT NULL,
    role_code VARCHAR(255) NOT NULL,
    position_code VARCHAR(255) NOT NULL,
+   appointment_item_code VARCHAR(255) NOT NULL,
    FOREIGN KEY (employee_id) REFERENCES employee(employee_id),
    FOREIGN KEY (authorizer_id) REFERENCES employee(employee_id),
    FOREIGN KEY (department_code) REFERENCES department(department_code),
    FOREIGN KEY (duty_code) REFERENCES duty(duty_code),
    FOREIGN KEY (role_code) REFERENCES `role`(role_code),
-   FOREIGN KEY (position_code) REFERENCES `position`(position_code)
+   FOREIGN KEY (position_code) REFERENCES `position`(position_code),
+   FOREIGN KEY (appointment_item_code) REFERENCES appointment_item(appointment_item_code)
 );
 
 -- 부서 구성원 테이블
@@ -549,7 +552,6 @@ CREATE TABLE evaluation (
 );
 
 -- 평가정책별평가 테이블
-
 CREATE TABLE task_type_eval (
    task_type_eval_id BIGINT PRIMARY KEY AUTO_INCREMENT,
    task_type_total_score DOUBLE NOT NULL,
