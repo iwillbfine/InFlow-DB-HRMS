@@ -99,7 +99,7 @@ CREATE TABLE duty (
 CREATE TABLE employee ( 
    employee_id BIGINT PRIMARY KEY AUTO_INCREMENT,
    employee_number VARCHAR(255) NOT NULL UNIQUE,
-   employee_role VARCHAR(255) NOT NULL CHECK(employee_role IN ('EMPLOYEE', 'ADMIN')),
+   employee_role VARCHAR(255) NOT NULL CHECK(employee_role IN ('EMPLOYEE','HR','MANAGER','ADMIN')),
    password VARCHAR(255) NOT NULL,
    gender VARCHAR(255) NOT NULL CHECK(gender IN ('MALE', 'FEMALE')),
    name VARCHAR(255) NOT NULL,
