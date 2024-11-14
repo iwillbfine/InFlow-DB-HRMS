@@ -544,7 +544,6 @@ CREATE TABLE evaluation (
    year INT NOT NULL,
    half VARCHAR(255) NOT NULL,
    created_at TIMESTAMP NOT NULL,
-   modifiable_date TIMESTAMP NOT NULL,
    evaluator_id BIGINT NOT NULL,
    employee_id BIGINT NOT NULL,
    FOREIGN KEY (evaluator_id) REFERENCES employee(employee_id),
