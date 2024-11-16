@@ -508,16 +508,6 @@ CREATE TABLE task_type (
    task_type_name VARCHAR(255) NOT NULL UNIQUE
 );
 
--- 과제 항목 테이블
-CREATE TABLE task_item (
-   task_item_id BIGINT PRIMARY KEY AUTO_INCREMENT,
-   task_name VARCHAR(255) NOT NULL,
-   task_content TEXT NOT NULL,
-   assigned_employee_count BIGINT NOT NULL,
-   task_type_id BIGINT NOT NULL,
-   FOREIGN KEY (task_type_id) REFERENCES task_type(task_type_id)
-);
-
 -- 평가 정책 테이블
 CREATE TABLE evaluation_policy (
    evaluation_policy_id BIGINT PRIMARY KEY AUTO_INCREMENT,
@@ -535,6 +525,23 @@ CREATE TABLE evaluation_policy (
    FOREIGN KEY (policy_register_id) REFERENCES employee(employee_id),
    FOREIGN KEY (task_type_id) REFERENCES task_type(task_type_id)
 );
+
+-- 과제 항목 테이블
+CREATE TABLE task_item (
+   task_item_id BIGINT PRIMARY KEY AUTO_INCREMENT,
+   task_name VARCHAR(255) NOT NULL,
+   task_content TEXT NOT NULL,
+   assigned_employee_count BIGINT NOT NULL,
+   task_type_id BIGINT NOT NULL,
+   employee_id BIGINT NOT NULL,
+   department_code VARCHAR(255) NOT NULL,
+   evaluation_policy_id BIGINT NOT NULL,
+   FOREIGN KEY (task_type_id) REFERENCES task_type(task_type_id),
+   FOREIGN KEY (employee_id) REFERENCES employee(employee_id),
+   FOREIGN KEY (department_code) REFERENCES department(department_code),
+   FOREIGN KEY (evaluation_policy_id) REFERENCES evaluation_policy(evaluation_policy_id)
+);
+
 
 -- 평가 테이블
 CREATE TABLE evaluation (
@@ -568,6 +575,7 @@ CREATE TABLE grade (
    grade_name VARCHAR(255) NOT NULL UNIQUE,
    start_ratio DOUBLE NOT NULL,
    end_ratio DOUBLE NOT NULL,
+   absolute_eval_ratio Double NOT NULL,
    evaluation_policy_id BIGINT NOT NULL,
    FOREIGN KEY (evaluation_policy_id) REFERENCES evaluation_policy(evaluation_policy_id)
 );
