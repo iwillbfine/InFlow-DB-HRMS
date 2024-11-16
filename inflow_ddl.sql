@@ -109,7 +109,7 @@ CREATE TABLE employee (
    phone_number VARCHAR(255) NOT NULL,
    profile_img_url TEXT NOT NULL,
    join_date TIMESTAMP NOT NULL,
-   join_type VARCHAR(255) NOT NULL CHECK(join_type IN ('ROOKIE','VETERAN')),
+   join_type VARCHAR(255) NOT NULL CHECK(join_type IN ('ROOKIE','VETERAN')), -- 신입사원 또는 경력직
    resignation_date TIMESTAMP NULL,
    resignation_status VARCHAR(255) NOT NULL DEFAULT 'N' CHECK(resignation_status IN ('Y','N')),
    salary BIGINT NOT NULL,
@@ -131,7 +131,7 @@ CREATE TABLE employee (
 
 -- 가족 구성원 테이블
 CREATE TABLE family_relationship (
-   family_relationship_code VARCHAR(255) PRIMARY KEY,
+   family_relationship_code VARCHAR(255) PRIMARY KEY ,
    family_relationship_name VARCHAR(255) NOT NULL UNIQUE
 );
 
@@ -176,7 +176,8 @@ CREATE TABLE contract (
    created_at TIMESTAMP NOT NULL,
    file_name VARCHAR(255) NOT NULL,
    file_url TEXT NOT NULL UNIQUE,
-   review_status VARCHAR(255) NOT NULL DEFAULT 'N' CHECK(review_status IN ('Y','N')),
+   contract_status VARCHAR(255) NOT NULL DEFAULT 'SIGNING' 
+										  CHECK(contract_status IN ('SIGNING', 'PENDING', 'APPROVED', 'REJECTED')), -- 계약서 상태
    employee_id BIGINT NOT NULL,
    reviewer_id BIGINT NOT NULL,
    FOREIGN KEY (employee_id) REFERENCES employee(employee_id),
