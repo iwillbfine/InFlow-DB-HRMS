@@ -547,8 +547,8 @@ CREATE TABLE task_item (
 CREATE TABLE evaluation (
    evaluation_id BIGINT PRIMARY KEY AUTO_INCREMENT,
    evaluation_type VARCHAR(255) NOT NULL,
-   final_grade VARCHAR(255) NULL,
-   final_score DOUBLE NULL,
+   fin_grade VARCHAR(255) NULL,
+   fin_score DOUBLE NULL,
    year INT NOT NULL,
    half VARCHAR(255) NOT NULL,
    created_at TIMESTAMP NOT NULL,
@@ -572,10 +572,10 @@ CREATE TABLE task_type_eval (
 -- 등급 테이블
 CREATE TABLE grade (
    grade_id BIGINT PRIMARY KEY AUTO_INCREMENT,
-   grade_name VARCHAR(255) NOT NULL UNIQUE,
+   grade_name VARCHAR(255) NOT NULL,
    start_ratio DOUBLE NOT NULL,
    end_ratio DOUBLE NOT NULL,
-   absolute_eval_ratio Double NOT NULL,
+   absolute_grade_ratio Double NOT NULL,
    evaluation_policy_id BIGINT NOT NULL,
    FOREIGN KEY (evaluation_policy_id) REFERENCES evaluation_policy(evaluation_policy_id)
 );
