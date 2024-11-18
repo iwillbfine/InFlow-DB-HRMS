@@ -292,6 +292,7 @@ CREATE TABLE vacation_policy (
    vacation_policy_id BIGINT PRIMARY KEY AUTO_INCREMENT,
    vacation_policy_name VARCHAR(255) NOT NULL,
    vacation_policy_description TEXT NOT NULL,
+   vacation_policy_status VARCHAR(255) NOT NULL DEFAULT 'NORMAL',
    allocation_days BIGINT NOT NULL,
    paid_status VARCHAR(255) NOT NULL DEFAULT 'N' CHECK(paid_status IN ('Y', 'N')),
    year INT NOT NULL,
