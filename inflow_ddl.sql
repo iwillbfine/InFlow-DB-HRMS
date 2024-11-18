@@ -532,6 +532,7 @@ CREATE TABLE task_item (
    task_name VARCHAR(255) NOT NULL,
    task_content TEXT NOT NULL,
    assigned_employee_count BIGINT NOT NULL,
+   is_manager_written BOOLEAN DEFAULT FALSE,
    task_type_id BIGINT NOT NULL,
    employee_id BIGINT NOT NULL,
    department_code VARCHAR(255) NOT NULL,
