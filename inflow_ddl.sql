@@ -237,7 +237,7 @@ CREATE TABLE appointment (
    appointment_id BIGINT PRIMARY KEY AUTO_INCREMENT,
    appointed_at TIMESTAMP NOT NULL,
    employee_id BIGINT NOT NULL,
-   authorizer_id BIGINT NOT NULL,
+   authorizer_id BIGINT NOT NULL, -- 발령권자
    department_code VARCHAR(255) NOT NULL,
    duty_code VARCHAR(255) NOT NULL,
    role_code VARCHAR(255) NOT NULL,

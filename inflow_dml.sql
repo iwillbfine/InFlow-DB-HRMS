@@ -153,7 +153,7 @@ INSERT INTO employee (
     attendance_status_type_code, position_code, role_code, duty_code
 )
 VALUES 
-(1, '202000001', 'ADMIN', 'password123', 'MALE', '홍길동', '1985-03-15', '123456-1234567', 
+(1, '202000001', 'ADMIN', '$2a$10$sVSalEAgPdSXNweDG/Meo.z1Fzz9mIvjMhHascKEGRDCKp5KrsXyC', 'MALE', '홍길동', '1985-03-15', '123456-1234567', 
  'hong@company.com', '010-1234-5678', 'https://example.com/profile1.jpg', '2020-01-01 09:00:00', 
  'ROOKIE', NULL, 'N', 50000000, 4000000, '서울 강남구 개포로 109길 5', '101동 101호', '06335', 
  'DP001', 'AS001', 'P001', 'R001', 'D003'),
@@ -197,7 +197,7 @@ VALUES
  'jang@company.com', '010-9012-3456', 'https://example.com/profile9.jpg', '2021-09-30 09:00:00', 
  'ROOKIE', NULL, 'N', 45000000, 3700000, '경기도 수원시 영통구 광교로 55', '102동 202호', '16704', 
  'DP006', 'AS001', 'P001', 'R001', 'D005'),
-(10, '202000003', 'EMPLOYEE', 'password107', 'MALE', '장은희', '1991-03-14', '012345-0123456', 
+(10, '202000003', 'EMPLOYEE', 'password107', 'MALE', '조우주', '1991-03-14', '012345-0123456', 
  'leej@company.com', '010-2345-6780', 'https://example.com/profile10.jpg', '2020-02-10 09:00:00', 
  'VETERAN', NULL, 'N', 47000000, 3900000, '경기도 성남시 분당구 백현로 97', '201동 1502호', '13518', 
  'DP006', 'AS002', 'P001', 'R001', 'D005'),
@@ -712,7 +712,7 @@ INSERT INTO appointment_item (appointment_item_code, appointment_item_name) VALU
 ('RCHG', '보직변경');
 
 -- 인사발령 테이블
-INSERT INTO appointment (appointment_id, appointed_at, employee_id, authorizer_id, appointment_item_code, department_code, duty_code, role_code, position_code)
+INSERT INTO appointment (appointment_id, appointed_at, employee_id,authorizer_id, appointment_item_code, department_code, duty_code, role_code, position_code)
 VALUES
 -- 한상민의 첫 발령: 입사 시 주임으로 IT 기술 부서로 발령
 (1, '2021-03-15 09:00:00', 7, 1, 'TRNS', 'DP006', 'D005', 'R001', 'P001'), -- 주임(P001)으로 입사
