@@ -429,18 +429,10 @@ CREATE TABLE payment (
    total_deductible BIGINT NOT NULL,
    employee_id BIGINT NOT NULL,
    public_holiday_id BIGINT NOT NULL,
-   non_taxable_id BIGINT NOT NULL,
-   major_insurance_id BIGINT NOT NULL,
    earned_income_tax_id BIGINT NOT NULL,
-   tax_credit_id BIGINT NOT NULL,
-   irregular_allowance_id BIGINT NOT NULL,
    FOREIGN KEY (employee_id) REFERENCES employee(employee_id),
    FOREIGN KEY (public_holiday_id) REFERENCES public_holiday(public_holiday_id),
-   FOREIGN KEY (non_taxable_id) REFERENCES non_taxable(non_taxable_id),
-   FOREIGN KEY (major_insurance_id) REFERENCES major_insurance(major_insurance_id),
-   FOREIGN KEY (earned_income_tax_id) REFERENCES earned_income_tax(earned_income_tax_id),
-   FOREIGN KEY (tax_credit_id) REFERENCES tax_credit(tax_credit_id),
-   FOREIGN KEY (irregular_allowance_id) REFERENCES irregular_allowance(irregular_allowance_id)
+   FOREIGN KEY (earned_income_tax_id) REFERENCES earned_income_tax(earned_income_tax_id)
 );
 
 -- 근태 신청 유형 테이블
