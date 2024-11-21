@@ -885,9 +885,9 @@ VALUES
 
 INSERT INTO task_type (task_type_id, task_type_name)
 VALUES
-    (1, '부서평가'),
-    (2, '개인평가'),
-    (3, '공통평가');
+    (1, '부서과제'),
+    (2, '개인과제'),
+    (3, '공통과제');
 
 INSERT INTO evaluation_policy (
     evaluation_policy_id, start_date, end_date, year, half, task_ratio,
