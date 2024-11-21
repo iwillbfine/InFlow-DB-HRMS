@@ -615,15 +615,16 @@ CREATE TABLE task_eval (
    FOREIGN KEY (task_item_id) REFERENCES task_item(task_item_id)
 );
 
--- 반기별 부서 성과 비율 통계 테이블
+-- 반기별 부서 평가 통계 테이블
 CREATE TABLE semiannual_department_performance_ratio_statistics (
    statistics_id BIGINT PRIMARY KEY AUTO_INCREMENT,
    year INT NOT NULL,
    half VARCHAR(255) NOT NULL,
-   performance_ratio DOUBLE NOT NULL,
    created_at TIMESTAMP NOT NULL,
    department_code VARCHAR(255) NOT NULL,
-   FOREIGN KEY (department_code) REFERENCES department(department_code)
+   task_eval_id BIGINT NOT NULL,
+   FOREIGN KEY (department_code) REFERENCES department(department_code),
+   FOREIGN KEY (task_eval_id) REFERENCES task_eval(task_eval_id)
 );
 
 -- 월별 부서 초과 근무 수당 통계 테이블
