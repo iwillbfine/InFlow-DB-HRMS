@@ -28,7 +28,7 @@ GRANT ALL PRIVILEGES ON inflowdb.* TO 'inflow'@'%';   -- yoribogo에 대한 모�
 -- pado 계정의 바뀐 권한 확인하기
 SHOW GRANTS FOR 'inflow'@'%';
 
--- 3) 새로운 접속기 생성 후 접속하고 데이터베이스 활용하기
+-- 3) 새로운 접속기 생성 후 접속하고 데이터베이스 활용하기earned_income_tax
 -- 좌측 상단의 '파일' 버튼을 눌러 '세션 관리자'에서 '신규'로 inflow 계정 접속기를 만들어
 -- 접속하고 database(schema)를 사용한다.
 -- 접속기의 Connection Name은 'inflow'로 지정
