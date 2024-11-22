@@ -66,10 +66,12 @@ CREATE TABLE company (
 	company_id BIGINT PRIMARY KEY AUTO_INCREMENT,
 	company_name VARCHAR(255) NOT NULL,
 	ceo VARCHAR(255) NOT NULL,
+	ceo_signature VARCHAR(255) NOT NULL,
 	business_registration_number VARCHAR(255) NOT NULL,
 	company_address VARCHAR(255) NOT NULL,
 	company_phone_number VARCHAR(255) NOT NULL,
-	company_stamp_url TEXT NOT NULL
+	company_stamp_url TEXT NOT NULL,
+	company_logo_url TEXT NOT NULL
 );
 
 -- 부서 테이블
@@ -115,14 +117,14 @@ CREATE TABLE employee (
    password VARCHAR(255) NOT NULL,
    gender VARCHAR(255) NOT NULL CHECK(gender IN ('MALE', 'FEMALE')),
    name VARCHAR(255) NOT NULL,
-   birth_date DATETIME NOT NULL,
+   birth_date DATE NOT NULL,
    resident_registration_number VARCHAR(255) NOT NULL,
    email VARCHAR(255) NOT NULL,
    phone_number VARCHAR(255) NOT NULL,
    profile_img_url TEXT NOT NULL,
-   join_date TIMESTAMP NOT NULL,
+   join_date DATE NOT NULL,
    join_type VARCHAR(255) NOT NULL CHECK(join_type IN ('ROOKIE','VETERAN')), -- 신입사원 또는 경력직
-   resignation_date TIMESTAMP NULL,
+   resignation_date DATE NULL,
    resignation_status VARCHAR(255) NOT NULL DEFAULT 'N' CHECK(resignation_status IN ('Y','N')),
    salary BIGINT NOT NULL,
    monthly_salary BIGINT NOT NULL,
@@ -184,13 +186,16 @@ CREATE TABLE career (
 -- 계약서 테이블
 CREATE TABLE contract (
    contract_id BIGINT PRIMARY KEY AUTO_INCREMENT,
-   contract_type VARCHAR(255) NOT NULL,
+   contract_type VARCHAR(255) NOT NULL, -- 근로 계약서, 비밀 유지서약서 등 자유롭게 기입
    created_at TIMESTAMP NOT NULL,
    file_name VARCHAR(255) NOT NULL,
    file_url TEXT NOT NULL UNIQUE,
    contract_status VARCHAR(255) NOT NULL DEFAULT 'SIGNING' 
 										  CHECK(contract_status IN ('SIGNING', 'PENDING', 'APPROVED', 'REJECTED')), -- 계약서 상태
-   employee_id BIGINT NOT NULL,
+   consent_status VARCHAR(255) NOT NULL DEFAULT 'N' 
+										  CHECK(consent_status IN ('Y', 'N')), -- 동의 여부
+
+	employee_id BIGINT NOT NULL,
    reviewer_id BIGINT NOT NULL,
    FOREIGN KEY (employee_id) REFERENCES employee(employee_id),
    FOREIGN KEY (reviewer_id) REFERENCES employee(employee_id)
