@@ -118,7 +118,6 @@ CREATE TABLE employee (
    gender VARCHAR(255) NOT NULL CHECK(gender IN ('MALE', 'FEMALE')),
    name VARCHAR(255) NOT NULL,
    birth_date DATE NOT NULL,
-   resident_registration_number VARCHAR(255) NOT NULL,
    email VARCHAR(255) NOT NULL,
    phone_number VARCHAR(255) NOT NULL,
    profile_img_url TEXT NOT NULL,
