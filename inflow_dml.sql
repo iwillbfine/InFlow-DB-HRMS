@@ -45,7 +45,7 @@ VALUES
     ('R008', '대표'),
     ('R009', '감사'),
     ('R010', '고문');
-
+    
 -- 직무 테이블
 INSERT INTO duty (duty_code, duty_name)
 VALUES
