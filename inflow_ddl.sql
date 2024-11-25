@@ -475,7 +475,7 @@ CREATE TABLE attendance_request_file (
 -- 근태 기록 테이블
 CREATE TABLE commute (
    commute_id BIGINT PRIMARY KEY AUTO_INCREMENT,
-   start_time TIMESTAMP NOT NULL,
+   start_time TIMESTAMP NULL,
    end_time TIMESTAMP NULL,
    remote_status VARCHAR(255) NOT NULL DEFAULT 'N' CHECK(remote_status IN ('Y', 'N')),
    overtime_status VARCHAR(255) NOT NULL DEFAULT 'N' CHECK(overtime_status IN ('Y', 'N')),
