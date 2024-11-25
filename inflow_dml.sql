@@ -658,19 +658,19 @@ VALUES
     (10, '카카오', '모바일 앱 개발자', '2016-03-01 09:00:00', '2020-06-30 18:00:00', 5);
 
 -- 계약서 table
-INSERT INTO contract (contract_id, contract_type, created_at, file_name, file_url, contract_status, consent_status, employee_id, reviewer_id)
-VALUES 
-(1, '근로계약서', '2024-01-01 09:00:00', '홍길동_근로계약서', 'https://example.com/contract1.pdf', 'SIGNING', 'Y', 1, 5),
-(2, '비밀유지서약서', '2024-02-01 09:00:00', '김영희_비밀유지서약서', 'https://example.com/contract2.pdf', 'PENDING', 'Y', 2, 5),
-(3, '근로계약서', '2024-03-01 09:00:00', '박철수_근로계약서', 'https://example.com/contract3.pdf', 'SIGNING', 'Y', 3, 5),
-(4, '비밀유지서약서', '2024-04-01 09:00:00', '이수정_비밀유지서약서', 'https://example.com/contract4.pdf', 'APPROVED', 'Y', 4, 5),
-(5, '근로계약서', '2024-05-01 09:00:00', '최강욱_근로계약서', 'https://example.com/contract5.pdf', 'SIGNING', 'Y', 5, 3),
-(6, '비밀유지서약서', '2024-06-01 09:00:00', '홍길동_비밀유지서약서', 'https://example.com/contract6.pdf', 'APPROVED', 'Y', 1, 5),
-(7, '근로계약서', '2024-07-01 09:00:00', '김영희_근로계약서', 'https://example.com/contract7.pdf', 'SIGNING', 'Y', 2, 5),
-(8, '비밀유지서약서', '2024-08-01 09:00:00', '박철수_비밀유지서약서', 'https://example.com/contract8.pdf', 'PENDING', 'Y', 3, 5),
-(9, '근로계약서', '2024-09-01 09:00:00', '이수정_근로계약서', 'https://example.com/contract9.pdf', 'SIGNING', 'Y', 4, 5),
-(10, '비밀유지서약서', '2024-10-01 09:00:00', '최강욱_비밀유지서약서', 'https://example.com/contract10.pdf', 'APPROVED', 'Y', 5, 3);
-
+-- INSERT INTO contract (contract_id, contract_type, created_at, file_name, file_url, contract_status, consent_status, employee_id)
+-- VALUES 
+-- (1, 'EMPLOYMENT', '2024-01-01 09:00:00', '홍길동_근로계약서', 'https://example.com/contract1.pdf', 'SIGNING', 'Y', 1),
+-- (2, 'SECURITY', '2024-02-01 09:00:00', '김영희_비밀유지서약서', 'https://example.com/contract2.pdf', 'REGISTERED', 'Y', 2),
+-- (3, 'EMPLOYMENT', '2024-03-01 09:00:00', '박철수_근로계약서', 'https://example.com/contract3.pdf', 'SIGNING', 'Y', 3),
+-- (4, 'SECURITY', '2024-04-01 09:00:00', '이수정_비밀유지서약서', 'https://example.com/contract4.pdf', 'REGISTERED', 'Y', 4),
+-- (5, 'EMPLOYMENT', '2024-05-01 09:00:00', '최강욱_근로계약서', 'https://example.com/contract5.pdf', 'SIGNING', 'Y', 5),
+-- (6, 'SECURITY', '2024-06-01 09:00:00', '홍길동_비밀유지서약서', 'https://example.com/contract6.pdf', 'REGISTERED', 'Y', 1),
+-- (7, 'EMPLOYMENT', '2024-07-01 09:00:00', '김영희_근로계약서', 'https://example.com/contract7.pdf', 'SIGNING', 'Y', 2),
+-- (8, 'SECURITY', '2024-08-01 09:00:00', '박철수_비밀유지서약서', 'https://example.com/contract8.pdf', 'REGISTERED', 'Y', 3),
+-- (9, 'EMPLOYMENT', '2024-09-01 09:00:00', '이수정_근로계약서', 'https://example.com/contract9.pdf', 'SIGNING', 'Y', 4),
+-- (10, 'SECURITY', '2024-10-01 09:00:00', '최강욱_비밀유지서약서', 'https://example.com/contract10.pdf', 'REGISTERED', 'Y', 5);
+-- 
 -- 자격증 테이블
 INSERT INTO qualification (qualification_id, qualification_name, qualification_number, qualified_at, issuer, grade_score, employee_id)
 VALUES

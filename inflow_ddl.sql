@@ -185,19 +185,17 @@ CREATE TABLE career (
 -- 계약서 테이블
 CREATE TABLE contract (
    contract_id BIGINT PRIMARY KEY AUTO_INCREMENT,
-   contract_type VARCHAR(255) NOT NULL, -- 근로 계약서, 비밀 유지서약서 등 자유롭게 기입
-   created_at TIMESTAMP NOT NULL,
-   file_name VARCHAR(255) NOT NULL,
-   file_url TEXT NOT NULL UNIQUE,
+   contract_type VARCHAR(255) NOT NULL CHECK(contract_type IN ('EMPLOYMENT', 'SECURITY')), -- 근로 계약서, 비밀 유지서약서 등 자유롭게 기입
+   created_at TIMESTAMP NULL,
+   file_name VARCHAR(255) NULL,
+   file_url TEXT NULL UNIQUE,
    contract_status VARCHAR(255) NOT NULL DEFAULT 'SIGNING' 
-										  CHECK(contract_status IN ('SIGNING', 'PENDING', 'APPROVED', 'REJECTED')), -- 계약서 상태
+										  CHECK(contract_status IN ('SIGNING', 'REGISTERED')), -- 계약서 상태
    consent_status VARCHAR(255) NOT NULL DEFAULT 'N' 
 										  CHECK(consent_status IN ('Y', 'N')), -- 동의 여부
 
 	employee_id BIGINT NOT NULL,
-   reviewer_id BIGINT NOT NULL,
-   FOREIGN KEY (employee_id) REFERENCES employee(employee_id),
-   FOREIGN KEY (reviewer_id) REFERENCES employee(employee_id)
+   FOREIGN KEY (employee_id) REFERENCES employee(employee_id)
 );
 
 -- 자격증 테이블
