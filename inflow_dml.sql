@@ -172,12 +172,12 @@ INSERT INTO employee (
 )
 
 VALUES
-    (1, '202000001', 'ADMIN', '$2a$10$el.CsmHPQ9OSYT0XlLaof.teGPUIcDNutUFqbxb2A/ycNbKRQU7qa', 'MALE', '홍길동', '1985-03-15',
-     'hong@company.com', '010-1234-5678', 'https://example.com/profile1.jpg', '2020-01-01 09:00:00',
+    (1, '202000001', 'ADMIN', '$2a$10$gEF/iaV.jiHyAL0c8TZ2Aufen4ovoQyZX9ipoTKXUSIZ8h9XDlmFa', 'MALE', '홍길동', '1985-03-15',
+     'hong@company.com', '010-1234-5678', 'https://inflow-emp-profile.s3.ap-northeast-2.amazonaws.com/emp_basic_profile.png', '2020-01-01 09:00:00',
      'ROOKIE', NULL, 'N', 50000000, 4000000, '서울 강남구 개포로 109길 5', '101동 101호', '06335',
      'DP001', 'AS001', 'P001', 'R001', 'D003'),
     (2, '202100001', 'EMPLOYEE', 'password456', 'FEMALE', '김영희', '1990-07-22',
-     'kim@company.com', '010-2345-6789', 'https://example.com/profile2.jpg', '2021-03-10 09:00:00',
+     'kim@company.com', '010-2345-6789', 'https://inflow-emp-profile.s3.ap-northeast-2.amazonaws.com/emp_basic_profile.png', '2021-03-10 09:00:00',
      'VETERAN', NULL, 'N', 55000000, 4500000, '서울 강남구 개포로 109길 9', '202동 202호', '06335',
      'DP002', 'AS002', 'P002', 'R002', 'D004'),
     (3, '201800001', 'EMPLOYEE', 'password789', 'MALE', '박철수', '1982-11-05',
