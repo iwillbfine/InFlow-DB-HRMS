@@ -604,7 +604,7 @@ CREATE TABLE task_eval (
    task_eval_content TEXT NOT NULL,
    score DOUBLE NOT NULL,
    set_ratio DOUBLE NOT NULL,
-   task_grade VARCHAR(255) NOT NULL,
+   task_grade VARCHAR(255) NULL,
    performance_input TEXT NOT NULL,
    created_at TIMESTAMP NOT NULL,
    rel_eval_status BOOLEAN NOT NULL,
