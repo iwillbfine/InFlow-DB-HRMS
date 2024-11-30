@@ -230,7 +230,7 @@ CREATE TABLE language_test (
    FOREIGN KEY (language_code) REFERENCES `language`(language_code)
 );
 
--- 징계/보상 테이블
+-- 징계/포상 테이블
 CREATE TABLE discipline_reward (
    discipline_reward_id BIGINT PRIMARY KEY AUTO_INCREMENT,
    discipline_reward_name VARCHAR(255) NOT NULL,
