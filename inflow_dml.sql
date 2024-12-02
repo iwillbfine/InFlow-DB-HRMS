@@ -661,7 +661,7 @@ VALUES
 INSERT INTO contract (contract_id, contract_type, created_at, file_name, file_url, contract_status, consent_status, employee_id)
 VALUES 
 (1, 'EMPLOYMENT', NULL, NULL, NULL, 'SIGNING', 'N', 1),
-(2, 'SECURITY', '2024-02-01 09:00:00', '김영희_비밀유지서약서', 'https://example.com/contract2.pdf', 'REGISTERED', 'Y', 1),
+(2, 'SECURITY', NULL, NULL, NULL, 'SIGNING', 'N', 1),
 (3, 'EMPLOYMENT', NULL, NULL, NULL, 'SIGNING', 'N', 2),
 (4, 'SECURITY', '2024-02-02 09:00:00', '이순신_비밀유지서약서', 'https://example.com/contract4.pdf', 'REGISTERED', 'Y', 2),
 (5, 'EMPLOYMENT', NULL, NULL, NULL, 'SIGNING', 'N', 3),
