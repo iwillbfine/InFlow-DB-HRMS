@@ -173,7 +173,7 @@ INSERT INTO employee (
 
 VALUES
     (1, '202000001', 'ADMIN', '$2a$10$gEF/iaV.jiHyAL0c8TZ2Aufen4ovoQyZX9ipoTKXUSIZ8h9XDlmFa', 'MALE', '홍길동', '1985-03-15',
-     'hong@company.com', '010-1234-5678', 'https://inflow-emp-profile.s3.ap-northeast-2.amazonaws.com/emp_basic_profile.png', '2020-01-01 09:00:00',
+     'hong@company.com', '010-1234-5678', 'https://inflow-emp-profile.s3.ap-northeast-2.amazonaws.com/emp_admin.png', '2020-01-01 09:00:00',
      'ROOKIE', NULL, 'N', 50000000, 4000000, '서울 강남구 개포로 109길 5', '101동 101호', '06335',
      'DP001', 'AS001', 'P001', 'R001', 'D003'),
     (2, '202100001', 'EMPLOYEE', 'password456', 'FEMALE', '김영희', '1990-07-22',
@@ -193,24 +193,24 @@ VALUES
      'ROOKIE', NULL, 'N', 48000000, 3900000, '서울시 강남구 개포로 416', '505동 505호', '06324',
      'DP005', 'AS002', 'P005', 'R005', 'D007'),
 -- 인사팀 직원
-     (6, '201900001', 'HR', 'password103', 'FEMALE', '윤지혜', '1993-05-12',
-     'yoon@company.com', '010-6789-0123', 'https://example.com/profile6.jpg', '2019-04-01 09:00:00',
+     (6, '201900001', 'HR', '$2a$10$gEF/iaV.jiHyAL0c8TZ2Aufen4ovoQyZX9ipoTKXUSIZ8h9XDlmFa', 'FEMALE', '윤지혜', '1993-05-12',
+     'yoon@company.com', '010-6789-0123', 'https://inflow-emp-profile.s3.ap-northeast-2.amazonaws.com/emp_hr.png', '2019-04-01 09:00:00',
      'VETERAN', NULL, 'N', 47000000, 3900000, '서울 강남구 논현로 509', '606동 606호', '06349',
      'DP002', 'AS001', 'P001', 'R001', 'D002'),
 -- 3년차 개발직 대리
-    (7, '202101234', 'EMPLOYEE', 'password104', 'MALE', '한상민', '1995-10-21',
-     'han@company.com', '010-7890-1234', 'https://example.com/profile7.jpg', '2021-03-15 09:00:00',
+    (7, '202101234', 'EMPLOYEE', '$2a$10$gEF/iaV.jiHyAL0c8TZ2Aufen4ovoQyZX9ipoTKXUSIZ8h9XDlmFa', 'MALE', '한상민', '1995-10-21',
+     'han@company.com', '010-7890-1234', 'https://inflow-emp-profile.s3.ap-northeast-2.amazonaws.com/emp_man.png', '2021-03-15 09:00:00',
      'VETERAN', NULL, 'N', 36000000, 3000000, '서울 강남구 도산대로 311', '707동 707호', '06351',
      'DP006', 'AS001', 'P002', 'R001', 'D005'),
 -- IT 기술 지원 팀 부장
-   (8, '201500001', 'MANAGER', 'password105', 'MALE', '서진우', '1979-07-15',
-     'seo@company.com', '010-8901-2345', 'https://example.com/profile8.jpg', '2015-01-10 09:00:00',
+   (8, '201500001', 'MANAGER', '$2a$10$gEF/iaV.jiHyAL0c8TZ2Aufen4ovoQyZX9ipoTKXUSIZ8h9XDlmFa', 'MALE', '서진우', '1979-07-15',
+     'seo@company.com', '010-8901-2345', 'https://inflow-emp-profile.s3.ap-northeast-2.amazonaws.com/emp_manager.png', '2015-01-10 09:00:00',
      'VETERAN', NULL, 'N', 90000000, 7500000, '서울 강남구 압구정로 102', '808동 808호', '06353',
      'DP006', 'AS001', 'P005', 'R005', 'D006'),
 -- 9번 ~ 26번 사원: IT기술지원부 사원 (경기도 지역 주소와 사번 설정 완료)
 
-  	 (9, '202100002', 'EMPLOYEE', 'password106', 'FEMALE', '장은희', '1995-01-22',
-     'jang@company.com', '010-9012-3456', 'https://example.com/profile9.jpg', '2021-09-30 09:00:00',
+  	 (9, '202100002', 'EMPLOYEE', '$2a$10$gEF/iaV.jiHyAL0c8TZ2Aufen4ovoQyZX9ipoTKXUSIZ8h9XDlmFa', 'FEMALE', '장은희', '1995-01-22',
+     'jang@company.com', '010-9012-3456', 'https://inflow-emp-profile.s3.ap-northeast-2.amazonaws.com/emp_woman.png', '2021-09-30 09:00:00',
      'ROOKIE', NULL, 'N', 45000000, 3700000, '경기도 수원시 영통구 광교로 55', '102동 202호', '16704',
      'DP006', 'AS001', 'P001', 'R001', 'D005'),
     (10, '202000003', 'EMPLOYEE', 'password107', 'MALE', '조우주', '1991-03-14',
