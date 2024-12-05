@@ -88,17 +88,18 @@ BEGIN
 
     -- position_code에 따라 role_name 설정
     SET role_name = CASE NEW.position_code
-                        WHEN 'P001' THEN '팀원'
-                        WHEN 'P002' THEN '팀장'
-                        WHEN 'P003' THEN '프로젝트 매니저'
-                        WHEN 'P004' THEN '본부장'
-                        WHEN 'P005' THEN '부서장'
-                        WHEN 'P006' THEN '실장'
-                        WHEN 'P007' THEN '총괄'
-                        WHEN 'P008' THEN '대표'
-                        WHEN 'P009' THEN '감사'
-                        WHEN 'P010' THEN '고문'
-                        ELSE '팀원'
+						       WHEN 'P001' THEN '사원'
+							    WHEN 'P002' THEN '대리'
+							    WHEN 'P003' THEN '과장'
+							    WHEN 'P004' THEN '차장'
+							    WHEN 'P005' THEN '부장'
+							    WHEN 'P006' THEN '이사'
+							    WHEN 'P007' THEN '상무'
+							    WHEN 'P008' THEN '전무'
+							    WHEN 'P009' THEN '부사장'
+							    WHEN 'P010' THEN '사장'
+						    	ELSE '기타'
+
         END;
 
     -- attendance_status_type_code에 따라 attendance_status_type_name 설정
@@ -117,17 +118,22 @@ BEGIN
                                           ELSE '정상출근'
         END;
 
-    -- 상위 부서에서 하위 부서를 결정 (임의 기준으로 결정)
-    SET target_department_code = (
-        SELECT d.department_code
-        FROM department d
-        WHERE d.upper_department_code = NEW.department_code
-        LIMIT 1 -- 다수의 하위 부서가 있는 경우 임의로 하나를 선택
-    );
-
-    -- 하위 부서가 없는 경우, 기존 상위 부서를 그대로 사용
-    IF target_department_code IS NULL THEN
+    -- position_code가 P005(부서장)인 경우, 하위 부서로 할당하지 않음
+    IF NEW.position_code = 'P005' THEN
         SET target_department_code = NEW.department_code;
+    ELSE
+        -- 상위 부서에서 하위 부서를 결정 (임의 기준으로 결정)
+        SET target_department_code = (
+            SELECT d.department_code
+            FROM department d
+            WHERE d.upper_department_code = NEW.department_code
+            LIMIT 1 -- 다수의 하위 부서가 있는 경우 임의로 하나를 선택
+        );
+
+        -- 하위 부서가 없는 경우, 기존 상위 부서를 그대로 사용
+        IF target_department_code IS NULL THEN
+            SET target_department_code = NEW.department_code;
+        END IF;
     END IF;
 
     -- department_member 테이블에 새 사원 정보 추가
@@ -160,6 +166,7 @@ BEGIN
            );
 END//
 DELIMITER ;
+
 
 
 -- 사원 테이블
