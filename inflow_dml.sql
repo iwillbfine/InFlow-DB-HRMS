@@ -76,47 +76,45 @@ VALUES
     ('T005', '기획팀', '2023-08-01 09:00:00', NULL, 3, 'DP004'),
     ('T006', '기술지원팀', '2023-09-01 09:00:00', NULL, 4, 'DP006');
 
--- 부서구성원 테이블 트리거
 DELIMITER //
 CREATE TRIGGER after_employee_insert
-    AFTER INSERT ON employee
-    FOR EACH ROW
+AFTER INSERT ON employee
+FOR EACH ROW
 BEGIN
-    DECLARE role_name VARCHAR(50) DEFAULT '팀원';
-    DECLARE attendance_status_type_name VARCHAR(50) DEFAULT '정상출근';
-    DECLARE target_department_code VARCHAR(20);
+    DECLARE role_name VARCHAR(255) DEFAULT '팀원';
+    DECLARE attendance_status_type_name VARCHAR(255) DEFAULT '정상출근';
+    DECLARE target_department_code VARCHAR(255);
 
     -- position_code에 따라 role_name 설정
     SET role_name = CASE NEW.position_code
-						       WHEN 'P001' THEN '사원'
-							    WHEN 'P002' THEN '대리'
-							    WHEN 'P003' THEN '과장'
-							    WHEN 'P004' THEN '차장'
-							    WHEN 'P005' THEN '부장'
-							    WHEN 'P006' THEN '이사'
-							    WHEN 'P007' THEN '상무'
-							    WHEN 'P008' THEN '전무'
-							    WHEN 'P009' THEN '부사장'
-							    WHEN 'P010' THEN '사장'
-						    	ELSE '기타'
-
-        END;
+        WHEN 'P001' THEN '사원'
+        WHEN 'P002' THEN '대리'
+        WHEN 'P003' THEN '과장'
+        WHEN 'P004' THEN '차장'
+        WHEN 'P005' THEN '부장'
+        WHEN 'P006' THEN '이사'
+        WHEN 'P007' THEN '상무'
+        WHEN 'P008' THEN '전무'
+        WHEN 'P009' THEN '부사장'
+        WHEN 'P010' THEN '사장'
+        ELSE '기타'
+    END;
 
     -- attendance_status_type_code에 따라 attendance_status_type_name 설정
     SET attendance_status_type_name = CASE NEW.attendance_status_type_code
-                                          WHEN 'AS001' THEN '정상출근'
-                                          WHEN 'AS002' THEN '지각'
-                                          WHEN 'AS003' THEN '조퇴'
-                                          WHEN 'AS004' THEN '결근'
-                                          WHEN 'AS005' THEN '휴가'
-                                          WHEN 'AS006' THEN '병가'
-                                          WHEN 'AS007' THEN '출장'
-                                          WHEN 'AS008' THEN '재택근무'
-                                          WHEN 'AS009' THEN '공가'
-                                          WHEN 'AS010' THEN '연차'
-                                          WHEN 'AS011' THEN '퇴근'
-                                          ELSE '정상출근'
-        END;
+        WHEN 'AS001' THEN '정상출근'
+        WHEN 'AS002' THEN '지각'
+        WHEN 'AS003' THEN '조퇴'
+        WHEN 'AS004' THEN '결근'
+        WHEN 'AS005' THEN '휴가'
+        WHEN 'AS006' THEN '병가'
+        WHEN 'AS007' THEN '출장'
+        WHEN 'AS008' THEN '재택근무'
+        WHEN 'AS009' THEN '공가'
+        WHEN 'AS010' THEN '연차'
+        WHEN 'AS011' THEN '퇴근'
+        ELSE '정상출근'
+    END;
 
     -- position_code가 P005(부장)인 경우, 하위 부서로 할당하지 않음
     IF NEW.position_code = 'P005' THEN
@@ -127,7 +125,7 @@ BEGIN
             SELECT d.department_code
             FROM department d
             WHERE d.upper_department_code = NEW.department_code
-            LIMIT 1 -- 다수의 하위 부서가 있는 경우 임의로 하나를 선택
+            LIMIT 1
         );
 
         -- 하위 부서가 없는 경우, 기존 상위 부서를 그대로 사용
@@ -150,20 +148,20 @@ BEGIN
         employee_id
     )
     VALUES (
-               NEW.employee_number,
-               NEW.name,
-               role_name,
-               NEW.email,
-               NEW.profile_img_url,
-               NEW.phone_number,
-               attendance_status_type_name,
-               CASE
-                   WHEN NEW.position_code IN ('P002', 'P005', 'P004', 'P003') THEN 'Y'
-                   ELSE 'N'
-                   END,
-               target_department_code,
-               NEW.employee_id
-           );
+        NEW.employee_number,
+        NEW.name,
+        role_name,
+        NEW.email,
+        NEW.profile_img_url,
+        NEW.phone_number,
+        attendance_status_type_name,
+        CASE
+            WHEN NEW.position_code IN ('P002', 'P005', 'P004', 'P003') THEN 'Y'
+            ELSE 'N'
+        END,
+        target_department_code,
+        NEW.employee_id
+    );
 END//
 DELIMITER ;
 
