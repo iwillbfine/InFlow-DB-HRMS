@@ -118,7 +118,7 @@ BEGIN
                                           ELSE '정상출근'
         END;
 
-    -- position_code가 P005(부서장)인 경우, 하위 부서로 할당하지 않음
+    -- position_code가 P005(부장)인 경우, 하위 부서로 할당하지 않음
     IF NEW.position_code = 'P005' THEN
         SET target_department_code = NEW.department_code;
     ELSE
@@ -204,16 +204,16 @@ VALUES
      'yoon@company.com', '010-6789-0123', 'https://inflow-emp-profile.s3.ap-northeast-2.amazonaws.com/emp_hr.png', '2019-04-01 09:00:00',
      'VETERAN', NULL, 'N', 47000000, 3900000, '서울 강남구 논현로 509', '606동 606호', '06349',
      'DP002', 'AS001', 'P001', 'R001', 'D002'),
--- 3년차 개발직 대리
-    (7, '202101234', 'EMPLOYEE', '$2a$10$gEF/iaV.jiHyAL0c8TZ2Aufen4ovoQyZX9ipoTKXUSIZ8h9XDlmFa', 'MALE', '한상민', '1995-10-21',
-     'han@company.com', '010-7890-1234', 'https://inflow-emp-profile.s3.ap-northeast-2.amazonaws.com/emp_man.png', '2021-03-15 09:00:00',
+--  IT 기술 지원 팀 부장
+    (7, '201500001', 'EMPLOYEE', '$2a$10$gEF/iaV.jiHyAL0c8TZ2Aufen4ovoQyZX9ipoTKXUSIZ8h9XDlmFa', 'MALE', '한상민', '1989-10-21',
+     'han@company.com', '010-7890-1234', 'https://inflow-emp-profile.s3.ap-northeast-2.amazonaws.com/emp_man.png', '2015-03-15 09:00:00',
      'VETERAN', NULL, 'N', 36000000, 3000000, '서울 강남구 도산대로 311', '707동 707호', '06351',
-     'DP006', 'AS001', 'P002', 'R001', 'D005'),
--- IT 기술 지원 팀 부장
-   (8, '201500001', 'MANAGER', '$2a$10$gEF/iaV.jiHyAL0c8TZ2Aufen4ovoQyZX9ipoTKXUSIZ8h9XDlmFa', 'MALE', '서진우', '1979-07-15',
-     'seo@company.com', '010-8901-2345', 'https://inflow-emp-profile.s3.ap-northeast-2.amazonaws.com/emp_manager.png', '2015-01-10 09:00:00',
+     'DP006', 'AS001', 'P005', 'R005', 'D005'),
+-- 3년차 개발직 대리
+   (8, '202101234', 'MANAGER', '$2a$10$gEF/iaV.jiHyAL0c8TZ2Aufen4ovoQyZX9ipoTKXUSIZ8h9XDlmFa', 'MALE', '서진우', '1995-07-15',
+     'seo@company.com', '010-8901-2345', 'https://inflow-emp-profile.s3.ap-northeast-2.amazonaws.com/emp_manager.png', '2021-01-10 09:00:00',
      'VETERAN', NULL, 'N', 90000000, 7500000, '서울 강남구 압구정로 102', '808동 808호', '06353',
-     'DP006', 'AS001', 'P005', 'R005', 'D006'),
+     'DP006', 'AS001', 'P002', 'R001', 'D005'),
 -- 9번 ~ 26번 사원: IT기술지원부 사원 (경기도 지역 주소와 사번 설정 완료)
 
   	 (9, '202100002', 'EMPLOYEE', '$2a$10$gEF/iaV.jiHyAL0c8TZ2Aufen4ovoQyZX9ipoTKXUSIZ8h9XDlmFa', 'FEMALE', '장은희', '1995-01-22',
