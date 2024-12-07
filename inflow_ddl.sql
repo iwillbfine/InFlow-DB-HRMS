@@ -72,7 +72,7 @@ CREATE TABLE company (
                          company_phone_number VARCHAR(255) NOT NULL,
                          company_stamp_url TEXT NOT NULL,
                          company_logo_url TEXT NOT NULL
-) ENGINE=INNODB COMMENT '회사' CHARACTER SET utf8;
+) ENGINE=INNODB COMMENT '회사' CHARACTER SET utf8mb4;
 
 -- 부서 테이블
 CREATE TABLE department (
@@ -83,31 +83,31 @@ CREATE TABLE department (
                             min_employee_num INT NOT NULL DEFAULT 0,
                             upper_department_code VARCHAR(255) NULL,
                             FOREIGN KEY (upper_department_code) REFERENCES department(department_code)
-) ENGINE=INNODB COMMENT '부서' CHARACTER SET utf8;
+) ENGINE=INNODB COMMENT '부서' CHARACTER SET utf8mb4;
 
 -- 출퇴근 상태 유형 테이블
 CREATE TABLE attendance_status_type (
                                         attendance_status_type_code VARCHAR(255) PRIMARY KEY,
                                         attendance_status_type_name VARCHAR(255) NOT NULL UNIQUE
-) ENGINE=INNODB COMMENT '출퇴근 상태' CHARACTER SET utf8;
+) ENGINE=INNODB COMMENT '출퇴근 상태' CHARACTER SET utf8mb4;
 
 -- 직위 테이블
 CREATE TABLE `position` (
                             position_code VARCHAR(255) PRIMARY KEY,
                             position_name VARCHAR(255) NOT NULL UNIQUE
-) ENGINE=INNODB COMMENT '직위' CHARACTER SET utf8;
+) ENGINE=INNODB COMMENT '직위' CHARACTER SET utf8mb4;
 
 -- 직책 테이블
 CREATE TABLE `role` (
                         role_code VARCHAR(255) PRIMARY KEY,
                         role_name VARCHAR(255) NOT NULL UNIQUE
-) ENGINE=INNODB COMMENT '직책' CHARACTER SET utf8;
+) ENGINE=INNODB COMMENT '직책' CHARACTER SET utf8mb4;
 
 -- 직무 테이블
 CREATE TABLE duty (
                       duty_code VARCHAR(255) PRIMARY KEY,
                       duty_name VARCHAR(255) NOT NULL UNIQUE
-) ENGINE=INNODB COMMENT '직책' CHARACTER SET utf8;
+) ENGINE=INNODB COMMENT '직책' CHARACTER SET utf8mb4;
 
 -- 사원 테이블
 CREATE TABLE employee (
@@ -140,13 +140,13 @@ CREATE TABLE employee (
                           FOREIGN KEY (position_code) REFERENCES `position`(position_code),
                           FOREIGN KEY (role_code) REFERENCES `role`(role_code),
                           FOREIGN KEY (duty_code) REFERENCES duty(duty_code)
-) ENGINE=INNODB COMMENT '사원' CHARACTER SET utf8;
+) ENGINE=INNODB COMMENT '사원' CHARACTER SET utf8mb4;
 
 -- 가구원 관계 테이블
 CREATE TABLE family_relationship (
                                      family_relationship_code VARCHAR(255) PRIMARY KEY ,
                                      family_relationship_name VARCHAR(255) NOT NULL UNIQUE
-) ENGINE=INNODB COMMENT '가구원 관계' CHARACTER SET utf8;
+) ENGINE=INNODB COMMENT '가구원 관계' CHARACTER SET utf8mb4;
 
 -- 가족 구성원 테이블
 CREATE TABLE family_member (
@@ -157,7 +157,7 @@ CREATE TABLE family_member (
                                family_relationship_code VARCHAR(255) NOT NULL,
                                FOREIGN KEY (employee_id) REFERENCES employee(employee_id),
                                FOREIGN KEY (family_relationship_code) REFERENCES family_relationship(family_relationship_code)
-) ENGINE=INNODB COMMENT '가족 구성원' CHARACTER SET utf8;
+) ENGINE=INNODB COMMENT '가족 구성원' CHARACTER SET utf8mb4;
 
 -- 학력 테이블
 CREATE TABLE education (
@@ -169,7 +169,7 @@ CREATE TABLE education (
                            major VARCHAR(255) NULL,
                            employee_id BIGINT NOT NULL,
                            FOREIGN KEY (employee_id) REFERENCES employee(employee_id)
-) ENGINE=INNODB COMMENT '학력' CHARACTER SET utf8;
+) ENGINE=INNODB COMMENT '학력' CHARACTER SET utf8mb4;
 
 -- 경력 테이블
 CREATE TABLE career (
@@ -180,7 +180,7 @@ CREATE TABLE career (
                         resignation_date TIMESTAMP NOT NULL,
                         employee_id BIGINT NOT NULL,
                         FOREIGN KEY (employee_id) REFERENCES employee(employee_id)
-) ENGINE=INNODB COMMENT '경력' CHARACTER SET utf8;
+) ENGINE=INNODB COMMENT '경력' CHARACTER SET utf8mb4;
 
 -- 계약서 테이블
 CREATE TABLE contract (
@@ -196,7 +196,7 @@ CREATE TABLE contract (
 
                           employee_id BIGINT NOT NULL,
                           FOREIGN KEY (employee_id) REFERENCES employee(employee_id)
-) ENGINE=INNODB COMMENT '계약서' CHARACTER SET utf8;
+) ENGINE=INNODB COMMENT '계약서' CHARACTER SET utf8mb4;
 
 -- 자격증 테이블
 CREATE TABLE qualification (
@@ -208,13 +208,13 @@ CREATE TABLE qualification (
                                grade_score VARCHAR(255) NOT NULL,
                                employee_id BIGINT NOT NULL,
                                FOREIGN KEY (employee_id) REFERENCES employee(employee_id)
-) ENGINE=INNODB COMMENT '자격증' CHARACTER SET utf8;
+) ENGINE=INNODB COMMENT '자격증' CHARACTER SET utf8mb4;
 
 -- 어학 테이블
 CREATE TABLE `language` (
                             language_code VARCHAR(255) PRIMARY KEY,
                             language_name VARCHAR(255) NOT NULL UNIQUE
-) ENGINE=INNODB COMMENT '어학' CHARACTER SET utf8;
+) ENGINE=INNODB COMMENT '어학' CHARACTER SET utf8mb4;
 
 -- 어학시험  테이블
 CREATE TABLE language_test (
@@ -228,7 +228,7 @@ CREATE TABLE language_test (
                                language_code VARCHAR(255) NOT NULL,
                                FOREIGN KEY (employee_id) REFERENCES employee(employee_id),
                                FOREIGN KEY (language_code) REFERENCES `language`(language_code)
-) ENGINE=INNODB COMMENT '어학시험' CHARACTER SET utf8;
+) ENGINE=INNODB COMMENT '어학시험' CHARACTER SET utf8mb4;
 
 -- 징계/포상 테이블
 CREATE TABLE discipline_reward (
@@ -238,13 +238,13 @@ CREATE TABLE discipline_reward (
                                    created_at TIMESTAMP NOT NULL,
                                    employee_id BIGINT NOT NULL,
                                    FOREIGN KEY (employee_id) REFERENCES employee(employee_id)
-) ENGINE=INNODB COMMENT '징계/포상' CHARACTER SET utf8;
+) ENGINE=INNODB COMMENT '징계/포상' CHARACTER SET utf8mb4;
 
 -- 인사발령 항목 테이블
 CREATE TABLE appointment_item (
                                   appointment_item_code VARCHAR(255) PRIMARY KEY,
                                   appointment_item_name VARCHAR(255) NOT NULL
-) ENGINE=INNODB COMMENT '인사발령 항목' CHARACTER SET utf8;
+) ENGINE=INNODB COMMENT '인사발령 항목' CHARACTER SET utf8mb4;
 
 -- 인사발령 테이블
 CREATE TABLE appointment (
@@ -264,7 +264,7 @@ CREATE TABLE appointment (
                              FOREIGN KEY (role_code) REFERENCES `role`(role_code),
                              FOREIGN KEY (position_code) REFERENCES `position`(position_code),
                              FOREIGN KEY (appointment_item_code) REFERENCES appointment_item(appointment_item_code)
-) ENGINE=INNODB COMMENT '인사발령' CHARACTER SET utf8;
+) ENGINE=INNODB COMMENT '인사발령' CHARACTER SET utf8mb4;
 
 -- 부서 구성원 테이블
 CREATE TABLE department_member (
@@ -281,7 +281,7 @@ CREATE TABLE department_member (
                                    employee_id BIGINT NOT NULL,
                                    FOREIGN KEY (department_code) REFERENCES department(department_code),
                                    FOREIGN KEY (employee_id) REFERENCES employee(employee_id)
-) ENGINE=INNODB COMMENT '부서 구성원' CHARACTER SET utf8;
+) ENGINE=INNODB COMMENT '부서 구성원' CHARACTER SET utf8mb4;
 
 -- 휴가 유형 테이블
 CREATE TABLE vacation_type (
@@ -304,7 +304,7 @@ CREATE TABLE vacation_policy (
                                  policy_register_id BIGINT NOT NULL,
                                  FOREIGN KEY (vacation_type_id) REFERENCES vacation_type(vacation_type_id),
                                  FOREIGN KEY (policy_register_id) REFERENCES employee(employee_id)
-) ENGINE=INNODB COMMENT '휴가 정책' CHARACTER SET utf8;
+) ENGINE=INNODB COMMENT '휴가 정책' CHARACTER SET utf8mb4;
 
 -- 휴가 테이블
 CREATE TABLE vacation (
@@ -321,7 +321,7 @@ CREATE TABLE vacation (
                           FOREIGN KEY (employee_id) REFERENCES employee(employee_id),
                           FOREIGN KEY (vacation_policy_id) REFERENCES vacation_policy(vacation_policy_id),
                           FOREIGN KEY (vacation_type_id) REFERENCES vacation_type(vacation_type_id)
-) ENGINE=INNODB COMMENT '휴가' CHARACTER SET utf8;
+) ENGINE=INNODB COMMENT '휴가' CHARACTER SET utf8mb4;
 
 -- 휴가 신청 테이블
 CREATE TABLE vacation_request (
@@ -339,7 +339,7 @@ CREATE TABLE vacation_request (
                                   vacation_id BIGINT NOT NULL,
                                   FOREIGN KEY (employee_id) REFERENCES employee(employee_id),
                                   FOREIGN KEY (vacation_id) REFERENCES vacation(vacation_id)
-) ENGINE=INNODB COMMENT '휴가 신청' CHARACTER SET utf8;
+) ENGINE=INNODB COMMENT '휴가 신청' CHARACTER SET utf8mb4;
 
 -- 휴가 신청 파일 테이블
 CREATE TABLE vacation_request_file (
@@ -348,7 +348,7 @@ CREATE TABLE vacation_request_file (
                                        file_url TEXT NOT NULL UNIQUE,
                                        vacation_request_id BIGINT NOT NULL,
                                        FOREIGN KEY (vacation_request_id) REFERENCES vacation_request(vacation_request_id)
-) ENGINE=INNODB COMMENT '휴가 신청 파일' CHARACTER SET utf8;
+) ENGINE=INNODB COMMENT '휴가 신청 파일' CHARACTER SET utf8mb4;
 
 -- 연차 촉진 제도 테이블
 CREATE TABLE annual_vacation_promotion_policy (
@@ -356,7 +356,7 @@ CREATE TABLE annual_vacation_promotion_policy (
                                                   month INT NOT NULL,
                                                   day INT NOT NULL,
                                                   standard INT NOT NULL
-) ENGINE=INNODB COMMENT '연차 촉진 제도' CHARACTER SET utf8;
+) ENGINE=INNODB COMMENT '연차 촉진 제도' CHARACTER SET utf8mb4;
 
 -- 근로 소득세 테이블
 CREATE TABLE earned_income_tax (
@@ -365,21 +365,21 @@ CREATE TABLE earned_income_tax (
                                    monthly_salary_under BIGINT NOT NULL,
                                    child_num INT NOT NULL,
                                    amount BIGINT NOT NULL
-) ENGINE=INNODB COMMENT '근로 소득세' CHARACTER SET utf8;
+) ENGINE=INNODB COMMENT '근로 소득세' CHARACTER SET utf8mb4;
 
 -- 4대 보험 테이블
 CREATE TABLE major_insurance (
                                  major_insurance_id BIGINT PRIMARY KEY AUTO_INCREMENT,
                                  insurance_name VARCHAR(255) NOT NULL,
                                  tax_rates DOUBLE NOT NULL
-) ENGINE=INNODB COMMENT '4대 보험' CHARACTER SET utf8;
+) ENGINE=INNODB COMMENT '4대 보험' CHARACTER SET utf8mb4;
 
 -- 비과세 항목 테이블
 CREATE TABLE non_taxable (
                              non_taxable_id BIGINT PRIMARY KEY AUTO_INCREMENT,
                              non_taxable_name VARCHAR(255) NOT NULL,
                              amount BIGINT NOT NULL
-) ENGINE=INNODB COMMENT '비과세 항목' CHARACTER SET utf8;
+) ENGINE=INNODB COMMENT '비과세 항목' CHARACTER SET utf8mb4;
 
 -- 세액 공제 테이블
 CREATE TABLE tax_credit (
@@ -387,7 +387,7 @@ CREATE TABLE tax_credit (
                             valid_child_num INT NOT NULL,
                             base_deductible BIGINT NOT NULL,
                             additional_deductible_per_child BIGINT NOT NULL
-) ENGINE=INNODB COMMENT '세액 공제' CHARACTER SET utf8;
+) ENGINE=INNODB COMMENT '세액 공제' CHARACTER SET utf8mb4;
 
 -- 공휴일 테이블
 CREATE TABLE public_holiday (
@@ -395,14 +395,14 @@ CREATE TABLE public_holiday (
                                 year INT NOT NULL,
                                 month INT NOT NULL,
                                 day_num INT NOT NULL
-) ENGINE=INNODB COMMENT '공휴일' CHARACTER SET utf8;
+) ENGINE=INNODB COMMENT '공휴일' CHARACTER SET utf8mb4;
 
 -- 비정기 수당 테이블
 CREATE TABLE irregular_allowance (
                                      irregular_allowance_id BIGINT PRIMARY KEY AUTO_INCREMENT,
                                      irregular_allowance_name VARCHAR(255) NOT NULL,
                                      amount BIGINT NOT NULL
-) ENGINE=INNODB COMMENT '비정기 수당' CHARACTER SET utf8;
+) ENGINE=INNODB COMMENT '비정기 수당' CHARACTER SET utf8mb4;
 
 -- 급여 테이블
 CREATE TABLE payment (
@@ -435,14 +435,14 @@ CREATE TABLE payment (
                          FOREIGN KEY (employee_id) REFERENCES employee(employee_id),
                          FOREIGN KEY (public_holiday_id) REFERENCES public_holiday(public_holiday_id),
                          FOREIGN KEY (earned_income_tax_id) REFERENCES earned_income_tax(earned_income_tax_id)
-) ENGINE=INNODB COMMENT '급여' CHARACTER SET utf8;
+) ENGINE=INNODB COMMENT '급여' CHARACTER SET utf8mb4;
 
 -- 근태 신청 유형 테이블
 CREATE TABLE attendance_request_type (
                                          attendance_request_type_id BIGINT PRIMARY KEY AUTO_INCREMENT,
                                          attendance_request_type_name VARCHAR(255) NOT NULL UNIQUE,
                                          attendance_request_type_description TEXT NOT NULL
-) ENGINE=INNODB COMMENT '근태 신청 유형' CHARACTER SET utf8;
+) ENGINE=INNODB COMMENT '근태 신청 유형' CHARACTER SET utf8mb4;
 
 -- 근태 신청 테이블
 CREATE TABLE attendance_request (
@@ -461,7 +461,7 @@ CREATE TABLE attendance_request (
                                     attendance_request_type_id BIGINT NOT NULL,
                                     FOREIGN KEY (employee_id) REFERENCES employee(employee_id),
                                     FOREIGN KEY (attendance_request_type_id) REFERENCES attendance_request_type(attendance_request_type_id)
-) ENGINE=INNODB COMMENT '근태 신청' CHARACTER SET utf8;
+) ENGINE=INNODB COMMENT '근태 신청' CHARACTER SET utf8mb4;
 
 -- 근태 신청 파일 테이블
 CREATE TABLE attendance_request_file (
@@ -470,7 +470,7 @@ CREATE TABLE attendance_request_file (
                                          file_url TEXT NOT NULL UNIQUE,
                                          attendance_request_id BIGINT NOT NULL,
                                          FOREIGN KEY (attendance_request_id) REFERENCES attendance_request(attendance_request_id)
-) ENGINE=INNODB COMMENT '근태 신청 파일' CHARACTER SET utf8;
+) ENGINE=INNODB COMMENT '근태 신청 파일' CHARACTER SET utf8mb4;
 
 -- 출퇴근 테이블
 CREATE TABLE commute (
@@ -483,7 +483,7 @@ CREATE TABLE commute (
                          attendance_request_id BIGINT NULL,
                          FOREIGN KEY (employee_id) REFERENCES employee(employee_id),
                          FOREIGN KEY (attendance_request_id) REFERENCES attendance_request(attendance_request_id)
-) ENGINE=INNODB COMMENT '출퇴근' CHARACTER SET utf8;
+) ENGINE=INNODB COMMENT '출퇴근' CHARACTER SET utf8mb4;
 
 -- 휴복직 테이블
 CREATE TABLE leave_return (
@@ -494,7 +494,7 @@ CREATE TABLE leave_return (
                               attendance_request_id BIGINT NOT NULL,
                               FOREIGN KEY (employee_id) REFERENCES employee(employee_id),
                               FOREIGN KEY (attendance_request_id) REFERENCES attendance_request(attendance_request_id)
-) ENGINE=INNODB COMMENT '휴복직' CHARACTER SET utf8;
+) ENGINE=INNODB COMMENT '휴복직' CHARACTER SET utf8mb4;
 
 -- 출장/파견 테이블
 CREATE TABLE business_trip (
@@ -507,13 +507,13 @@ CREATE TABLE business_trip (
                                attendance_request_id BIGINT NOT NULL,
                                FOREIGN KEY (employee_id) REFERENCES employee(employee_id),
                                FOREIGN KEY (attendance_request_id) REFERENCES attendance_request(attendance_request_id)
-) ENGINE=INNODB COMMENT '출장/파견' CHARACTER SET utf8;
+) ENGINE=INNODB COMMENT '출장/파견' CHARACTER SET utf8mb4;
 
 -- 과제 유형 테이블
 CREATE TABLE task_type (
                            task_type_id BIGINT PRIMARY KEY AUTO_INCREMENT,
                            task_type_name VARCHAR(255) NOT NULL UNIQUE
-) ENGINE=INNODB COMMENT '과제 유형' CHARACTER SET utf8;
+) ENGINE=INNODB COMMENT '과제 유형' CHARACTER SET utf8mb4;
 
 -- 평가 정책 테이블
 CREATE TABLE evaluation_policy (
@@ -531,7 +531,7 @@ CREATE TABLE evaluation_policy (
                                    task_type_id BIGINT NOT NULL,
                                    FOREIGN KEY (policy_register_id) REFERENCES employee(employee_id),
                                    FOREIGN KEY (task_type_id) REFERENCES task_type(task_type_id)
-) ENGINE=INNODB COMMENT '평가 정책' CHARACTER SET utf8;
+) ENGINE=INNODB COMMENT '평가 정책' CHARACTER SET utf8mb4;
 
 -- 과제 항목 테이블
 CREATE TABLE task_item (
@@ -548,7 +548,7 @@ CREATE TABLE task_item (
                            FOREIGN KEY (employee_id) REFERENCES employee(employee_id),
                            FOREIGN KEY (department_code) REFERENCES department(department_code),
                            FOREIGN KEY (evaluation_policy_id) REFERENCES evaluation_policy(evaluation_policy_id)
-) ENGINE=INNODB COMMENT '과제 항목' CHARACTER SET utf8;
+) ENGINE=INNODB COMMENT '과제 항목' CHARACTER SET utf8mb4;
 
 
 -- 평가 테이블
@@ -564,7 +564,7 @@ CREATE TABLE evaluation (
                             employee_id BIGINT NOT NULL,
                             FOREIGN KEY (evaluator_id) REFERENCES employee(employee_id),
                             FOREIGN KEY (employee_id) REFERENCES employee(employee_id)
-) ENGINE=INNODB COMMENT '평가' CHARACTER SET utf8;
+) ENGINE=INNODB COMMENT '평가' CHARACTER SET utf8mb4;
 
 -- 평가정책별평가 테이블
 CREATE TABLE task_type_eval (
@@ -575,7 +575,7 @@ CREATE TABLE task_type_eval (
                                 evaluation_policy_id BIGINT NOT NULL,
                                 FOREIGN KEY (evaluation_id) REFERENCES evaluation(evaluation_id),
                                 FOREIGN KEY (evaluation_policy_id) REFERENCES evaluation_policy(evaluation_policy_id)
-) ENGINE=INNODB COMMENT '평가 정책별 평가' CHARACTER SET utf8;
+) ENGINE=INNODB COMMENT '평가 정책별 평가' CHARACTER SET utf8mb4;
 
 -- 등급 테이블
 CREATE TABLE grade (
@@ -586,7 +586,7 @@ CREATE TABLE grade (
                        absolute_grade_ratio Double NOT NULL,
                        evaluation_policy_id BIGINT NOT NULL,
                        FOREIGN KEY (evaluation_policy_id) REFERENCES evaluation_policy(evaluation_policy_id)
-) ENGINE=INNODB COMMENT '등급' CHARACTER SET utf8;
+) ENGINE=INNODB COMMENT '등급' CHARACTER SET utf8mb4;
 
 -- 피드백 테이블
 CREATE TABLE feedback (
@@ -595,7 +595,7 @@ CREATE TABLE feedback (
                           created_at TIMESTAMP NOT NULL,
                           evaluation_id BIGINT NOT NULL,
                           FOREIGN KEY (evaluation_id) REFERENCES evaluation(evaluation_id)
-) ENGINE=INNODB COMMENT '피드백' CHARACTER SET utf8;
+) ENGINE=INNODB COMMENT '피드백' CHARACTER SET utf8mb4;
 
 -- 과제별 평가 테이블
 CREATE TABLE task_eval (
@@ -615,7 +615,7 @@ CREATE TABLE task_eval (
                            FOREIGN KEY (evaluation_id) REFERENCES evaluation(evaluation_id),
                            FOREIGN KEY (task_type_id) REFERENCES task_type(task_type_id),
                            FOREIGN KEY (task_item_id) REFERENCES task_item(task_item_id)
-) ENGINE=INNODB COMMENT '과제별 평가' CHARACTER SET utf8;
+) ENGINE=INNODB COMMENT '과제별 평가' CHARACTER SET utf8mb4;
 
 -- 반기별 부서 평가 통계 테이블
 CREATE TABLE semiannual_department_performance_ratio_statistics (
@@ -627,7 +627,7 @@ CREATE TABLE semiannual_department_performance_ratio_statistics (
                                                                     task_eval_id BIGINT NOT NULL,
                                                                     FOREIGN KEY (department_code) REFERENCES department(department_code),
                                                                     FOREIGN KEY (task_eval_id) REFERENCES task_eval(task_eval_id)
-) ENGINE=INNODB COMMENT '반기별 부서 평가 통계' CHARACTER SET utf8;
+) ENGINE=INNODB COMMENT '반기별 부서 평가 통계' CHARACTER SET utf8mb4;
 
 -- 월별 부서 초과 근무 수당 통계 테이블
 CREATE TABLE monthly_department_overtime_allowance_statistics (
@@ -638,7 +638,7 @@ CREATE TABLE monthly_department_overtime_allowance_statistics (
                                                                   created_at TIMESTAMP NOT NULL,
                                                                   department_code VARCHAR(255) NOT NULL,
                                                                   FOREIGN KEY (department_code) REFERENCES department(department_code)
-) ENGINE=INNODB COMMENT '월별 부서 초과 근무 수당 통계' CHARACTER SET utf8;
+) ENGINE=INNODB COMMENT '월별 부서 초과 근무 수당 통계' CHARACTER SET utf8mb4;
 
 -- 월별 사원수 통계 테이블
 CREATE TABLE monthly_employee_num_statistics (
@@ -650,7 +650,7 @@ CREATE TABLE monthly_employee_num_statistics (
                                                  joined_employee_num BIGINT NOT NULL,
                                                  lefted_employee_num BIGINT NOT NULL,
                                                  created_at TIMESTAMP NOT NULL
-) ENGINE=INNODB COMMENT '월별 사원수 통계' CHARACTER SET utf8;
+) ENGINE=INNODB COMMENT '월별 사원수 통계' CHARACTER SET utf8mb4;
 
 CREATE TABLE BATCH_JOB_INSTANCE  (
                                      JOB_INSTANCE_ID BIGINT  NOT NULL PRIMARY KEY ,
@@ -658,7 +658,7 @@ CREATE TABLE BATCH_JOB_INSTANCE  (
                                      JOB_NAME VARCHAR(100) NOT NULL,
                                      JOB_KEY VARCHAR(32) NOT NULL,
                                      constraint JOB_INST_UN unique (JOB_NAME, JOB_KEY)
-) ENGINE=InnoDB CHARACTER SET utf8;
+) ENGINE=InnoDB CHARACTER SET utf8mb4;
 
 CREATE TABLE BATCH_JOB_EXECUTION  (
                                       JOB_EXECUTION_ID BIGINT  NOT NULL PRIMARY KEY ,
@@ -673,7 +673,7 @@ CREATE TABLE BATCH_JOB_EXECUTION  (
                                       LAST_UPDATED DATETIME(6),
                                       constraint JOB_INST_EXEC_FK foreign key (JOB_INSTANCE_ID)
                                           references BATCH_JOB_INSTANCE(JOB_INSTANCE_ID)
-) ENGINE=InnoDB CHARACTER SET utf8;
+) ENGINE=InnoDB CHARACTER SET utf8mb4;
 
 CREATE TABLE BATCH_JOB_EXECUTION_PARAMS  (
                                              JOB_EXECUTION_ID BIGINT NOT NULL ,
@@ -683,7 +683,7 @@ CREATE TABLE BATCH_JOB_EXECUTION_PARAMS  (
                                              IDENTIFYING CHAR(1) NOT NULL ,
                                              constraint JOB_EXEC_PARAMS_FK foreign key (JOB_EXECUTION_ID)
                                                  references BATCH_JOB_EXECUTION(JOB_EXECUTION_ID)
-) ENGINE=InnoDB CHARACTER SET utf8;
+) ENGINE=InnoDB CHARACTER SET utf8mb4;
 
 CREATE TABLE BATCH_STEP_EXECUTION  (
                                        STEP_EXECUTION_ID BIGINT  NOT NULL PRIMARY KEY ,
@@ -707,7 +707,7 @@ CREATE TABLE BATCH_STEP_EXECUTION  (
                                        LAST_UPDATED DATETIME(6),
                                        constraint JOB_EXEC_STEP_FK foreign key (JOB_EXECUTION_ID)
                                            references BATCH_JOB_EXECUTION(JOB_EXECUTION_ID)
-) ENGINE=InnoDB CHARACTER SET utf8;
+) ENGINE=InnoDB CHARACTER SET utf8mb4;
 
 CREATE TABLE BATCH_STEP_EXECUTION_CONTEXT  (
                                                STEP_EXECUTION_ID BIGINT NOT NULL PRIMARY KEY,
@@ -715,7 +715,7 @@ CREATE TABLE BATCH_STEP_EXECUTION_CONTEXT  (
                                                SERIALIZED_CONTEXT TEXT ,
                                                constraint STEP_EXEC_CTX_FK foreign key (STEP_EXECUTION_ID)
                                                    references BATCH_STEP_EXECUTION(STEP_EXECUTION_ID)
-) ENGINE=InnoDB CHARACTER SET utf8;
+) ENGINE=InnoDB CHARACTER SET utf8mb4;
 
 CREATE TABLE BATCH_JOB_EXECUTION_CONTEXT  (
                                               JOB_EXECUTION_ID BIGINT NOT NULL PRIMARY KEY,
@@ -723,7 +723,7 @@ CREATE TABLE BATCH_JOB_EXECUTION_CONTEXT  (
                                               SERIALIZED_CONTEXT TEXT ,
                                               constraint JOB_EXEC_CTX_FK foreign key (JOB_EXECUTION_ID)
                                                   references BATCH_JOB_EXECUTION(JOB_EXECUTION_ID)
-) ENGINE=InnoDB CHARACTER SET utf8;
+) ENGINE=InnoDB CHARACTER SET utf8mb4;
 
 CREATE SEQUENCE BATCH_STEP_EXECUTION_SEQ START WITH 1 MINVALUE 1 MAXVALUE 9223372036854775806 INCREMENT BY 1 NOCACHE NOCYCLE ENGINE=InnoDB;
 CREATE SEQUENCE BATCH_JOB_EXECUTION_SEQ START WITH 1 MINVALUE 1 MAXVALUE 9223372036854775806 INCREMENT BY 1 NOCACHE NOCYCLE ENGINE=InnoDB;
