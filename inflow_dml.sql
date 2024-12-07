@@ -177,7 +177,7 @@ INSERT INTO employee (
 )
 
 VALUES
-    (1, '202000001', 'ADMIN', '$2a$10$gEF/iaV.jiHyAL0c8TZ2Aufen4ovoQyZX9ipoTKXUSIZ8h9XDlmFa', 'MALE', '홍길동', '1985-03-15',
+    (1, '199901234', 'ADMIN', '$2a$10$gEF/iaV.jiHyAL0c8TZ2Aufen4ovoQyZX9ipoTKXUSIZ8h9XDlmFa', 'MALE', '홍길동', '1971-03-15',
      'hong@company.com', '010-1234-5678', 'https://inflow-emp-profile.s3.ap-northeast-2.amazonaws.com/emp_admin.png', '2020-01-01 09:00:00',
      'ROOKIE', NULL, 'N', 50000000, 4000000, '서울 강남구 개포로 109길 5', '101동 101호', '06335',
      'DP001', 'AS001', 'P010', 'R008', 'D003'),
@@ -195,20 +195,20 @@ VALUES
      'DP004', 'AS003', 'P004', 'R004', 'D006'),
      
 -- 인사팀 부장
-    (5, '202000002', 'EMPLOYEE', '$2a$10$gEF/iaV.jiHyAL0c8TZ2Aufen4ovoQyZX9ipoTKXUSIZ8h9XDlmFa', 'MALE', '최강욱', '1992-09-30',
+    (5, '201000002', 'EMPLOYEE', '$2a$10$gEF/iaV.jiHyAL0c8TZ2Aufen4ovoQyZX9ipoTKXUSIZ8h9XDlmFa', 'MALE', '최강욱', '1982-09-30',
      'choi@company.com', '010-5678-9012', 'https://inflow-emp-profile.s3.ap-northeast-2.amazonaws.com/emp_basic_profile.png', '2020-05-10 09:00:00',
      'ROOKIE', NULL, 'N', 48000000, 3900000, '서울시 강남구 개포로 416', '505동 505호', '06324',
      'DP005', 'AS002', 'P005', 'R005', 'D004'),
 -- 인사팀 직원
-     (6, '201900001', 'HR', '$2a$10$gEF/iaV.jiHyAL0c8TZ2Aufen4ovoQyZX9ipoTKXUSIZ8h9XDlmFa', 'FEMALE', '윤지혜', '1993-05-12',
+     (6, '201901234', 'HR', '$2a$10$gEF/iaV.jiHyAL0c8TZ2Aufen4ovoQyZX9ipoTKXUSIZ8h9XDlmFa', 'FEMALE', '윤지혜', '1993-05-12',
      'yoon@company.com', '010-6789-0123', 'https://inflow-emp-profile.s3.ap-northeast-2.amazonaws.com/emp_hr.png', '2019-04-01 09:00:00',
      'VETERAN', NULL, 'N', 47000000, 3900000, '서울 강남구 논현로 509', '606동 606호', '06349',
-     'DP002', 'AS001', 'P001', 'R001', 'D002'),
+     'DP002', 'AS001', 'P002', 'R001', 'D002'),
      
 -- 7번 ~ 26번 사원: IT기술지원부 사원(총 20명)
 
 --  IT 기술 지원 팀 부장
-    (7, '201500001', 'MANAGER', '$2a$10$gEF/iaV.jiHyAL0c8TZ2Aufen4ovoQyZX9ipoTKXUSIZ8h9XDlmFa', 'MALE', '한상민', '1989-10-21',
+    (7, '201301234', 'MANAGER', '$2a$10$gEF/iaV.jiHyAL0c8TZ2Aufen4ovoQyZX9ipoTKXUSIZ8h9XDlmFa', 'MALE', '한상민', '1984-10-21',
      'han@company.com', '010-7890-1234', 'https://inflow-emp-profile.s3.ap-northeast-2.amazonaws.com/emp_man.png', '2015-03-15 09:00:00',
      'VETERAN', NULL, 'N', 36000000, 3000000, '서울 강남구 도산대로 311', '707동 707호', '06351',
      'DP006', 'AS001', 'P005', 'R005', 'D008'),
@@ -262,7 +262,7 @@ VALUES
     (19, '202200006', 'EMPLOYEE', 'password116', 'FEMALE', '김은서', '1998-01-12',
      'kimse@company.com', '010-3456-7890', 'https://inflow-emp-profile.s3.ap-northeast-2.amazonaws.com/emp_basic_profile.png', '2022-09-15 09:00:00',
      'ROOKIE', NULL, 'N', 45000000, 3700000, '경기도 광명시 광명로 121', '101동 303호', '14305',
-     'DP006', 'AS001', 'P001', 'R001', 'D005	'),
+     'DP006', 'AS001', 'P001', 'R001', 'D005'),
     (20, '202100005', 'EMPLOYEE', 'password117', 'MALE', '정민호', '1993-03-03',
      'jungmh@company.com', '010-5678-9011', 'https://inflow-emp-profile.s3.ap-northeast-2.amazonaws.com/emp_basic_profile.png', '2021-06-25 09:00:00',
      'ROOKIE', NULL, 'N', 47000000, 3900000, '경기도 하남시 미사대로 250', '301동 1004호', '12918',
@@ -368,7 +368,7 @@ VALUES
 	'VETERAN', NULL, 'N', 47000000, 3900000, '경기도 고양시 일산동구 백마로 150', '202동 1402호', '10425',
 	'DP001', 'AS001', 'P002', 'R002', 'D006'),
 	(45, '202200012', 'EMPLOYEE', 'password142', 'FEMALE', '최유정', '1998-09-05',
-	'choiyj@company.com', '010-1234-5678','https://inflow-emp-profile.s3.ap-northeast-2.amazonaws.com/emp_basic_profile.png', '2022-03-19 09:00:00',
+	'choiyj@company.com', '010-2234-5678','https://inflow-emp-profile.s3.ap-northeast-2.amazonaws.com/emp_basic_profile.png', '2022-03-19 09:00:00',
 	'ROOKIE', NULL, 'N', 46000000, 3700000, '경기도 시흥시 은행로 99', '203동 1006호', '15027',
 	'DP004', 'AS002', 'P003', 'R003', 'D005'),
 	(46, '202100018', 'EMPLOYEE', 'password143', 'MALE', '박준영', '1992-08-24',
@@ -422,11 +422,11 @@ VALUES
 	'ROOKIE', NULL, 'N', 47000000, 3700000, '인천광역시 중구 운남로 30', '302동 506호', '22386',
 	'DP005', 'AS001', 'P001', 'R001', 'D008'),
 	(58, '202200018', 'EMPLOYEE', 'password155', 'MALE', '장우진', '1995-11-13',
-	'jangwj@company.com', '010-6789-0123', 'https://inflow-emp-profile.s3.ap-northeast-2.amazonaws.com/emp_basic_profile.png', '2022-02-17 09:00:00',
+	'jangwj@company.com', '010-6789-1234', 'https://inflow-emp-profile.s3.ap-northeast-2.amazonaws.com/emp_basic_profile.png', '2022-02-17 09:00:00',
 	'ROOKIE', NULL, 'N', 47000000, 3800000, '인천광역시 동구 샛골로 75', '203동 1103호', '22551',
 	'DP003', 'AS002', 'P003', 'R003', 'D009'),
 	(59, '202100025', 'EMPLOYEE', 'password156', 'FEMALE', '윤소희', '1996-03-25',
-	'yoonsh@company.com', '010-7890-1234', 'https://inflow-emp-profile.s3.ap-northeast-2.amazonaws.com/emp_basic_profile.png', '2021-12-18 09:00:00',
+	'yoonsh@company.com', '010-1890-1234', 'https://inflow-emp-profile.s3.ap-northeast-2.amazonaws.com/emp_basic_profile.png', '2021-12-18 09:00:00',
 	'ROOKIE', NULL, 'N', 46000000, 3700000, '인천광역시 미추홀구 미추홀대로 210', '104동 307호', '22231',
 	'DP001', 'AS003', 'P001', 'R001', 'D001'),
 	(60, '202100026', 'EMPLOYEE', 'password157', 'MALE', '한준수', '1992-07-17',
@@ -456,7 +456,7 @@ VALUES
 
 -- 66번 ~ 90번 사원: 서울특별시 주소와 DP006 제외 부서 설정
 	 (66, '202200023', 'EMPLOYEE', 'password163', 'MALE', '장민수', '1993-04-22',
-	'jangms@company.com', '010-1234-5678', 'https://inflow-emp-profile.s3.ap-northeast-2.amazonaws.com/emp_basic_profile.png', '2022-03-15 09:00:00',
+	'jangms@company.com', '010-1294-5678', 'https://inflow-emp-profile.s3.ap-northeast-2.amazonaws.com/emp_basic_profile.png', '2022-03-15 09:00:00',
 	'ROOKIE', NULL, 'N', 47000000, 3800000, '서울특별시 강남구 테헤란로 150', '101동 202호', '06236',
 	'DP001', 'AS001', 'P001', 'R001', 'D002'),
 	(67, '202100028', 'EMPLOYEE', 'password164', 'FEMALE', '김소현', '1994-08-14',
@@ -540,7 +540,7 @@ VALUES
 	'ROOKIE', NULL, 'N', 48000000, 3800000, '서울특별시 구로구 디지털로 300', '204동 502호', '08378',
 	'DP005', 'AS003', 'P001', 'R001', 'D009'),
 	(87, '202200032', 'EMPLOYEE', 'password184', 'FEMALE', '정지윤', '1994-05-14',
-	'jungjy@company.com', '010-1234-5678', 'https://inflow-emp-profile.s3.ap-northeast-2.amazonaws.com/emp_basic_profile.png', '2022-05-30 09:00:00',
+	'jungjy@company.com', '010-1243-5678', 'https://inflow-emp-profile.s3.ap-northeast-2.amazonaws.com/emp_basic_profile.png', '2022-05-30 09:00:00',
 	'ROOKIE', NULL, 'N', 47000000, 3700000, '서울특별시 동대문구 장안로 100', '304동 604호', '02630',
 	'DP004', 'AS001', 'P002', 'R003', 'D006'),
 	(88, '202200033', 'EMPLOYEE', 'password185', 'MALE', '차현우', '1995-10-16',
