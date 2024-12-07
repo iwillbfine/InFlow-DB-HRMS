@@ -41,6 +41,8 @@ DROP TABLE IF EXISTS career;
 DROP TABLE IF EXISTS education;
 DROP TABLE IF EXISTS family_member;
 DROP TABLE IF EXISTS family_relationship;
+DROP TABLE IF EXISTS session_history;
+DROP TABLE IF EXISTS chatbot_session;
 DROP TABLE IF EXISTS employee;
 DROP TABLE IF EXISTS duty;
 DROP TABLE IF EXISTS `role`;
@@ -140,7 +142,27 @@ CREATE TABLE employee (
                           FOREIGN KEY (position_code) REFERENCES `position`(position_code),
                           FOREIGN KEY (role_code) REFERENCES `role`(role_code),
                           FOREIGN KEY (duty_code) REFERENCES duty(duty_code)
-) ENGINE=INNODB COMMENT '사원' CHARACTER SET utf8;
+) ENGINE=INNODB COMMENT '사원' CHARACTER SET UTF8;
+
+-- 사원별 챗봇 세션 테이블
+CREATE TABLE chatbot_session (
+    session_id VARCHAR(255) NOT NULL PRIMARY KEY,
+    employee_id BIGINT NOT NULL
+) ENGINE=INNODB COMMENT '사원별챗봇세션' CHARACTER SET UTF8;
+
+
+-- 세션별 대화 이력 테이블
+CREATE TABLE session_history (
+    session_history_id VARCHAR(255) NOT NULL PRIMARY KEY,
+    chatbot_type VARCHAR(255) NOT NULL CHECK(chatbot_type IN ('CHATBOT','HUMAN')), -- 챗봇 또는 사람
+    chatbot_content TEXT,
+    session_id VARCHAR(255) NOT NULL,
+    FOREIGN KEY (session_id) REFERENCES chatbot_session(session_id)
+) ENGINE=INNODB COMMENT '세션별대화이력' CHARACTER SET UTF8;
+
+
+
+
 
 -- 가구원 관계 테이블
 CREATE TABLE family_relationship (
@@ -717,7 +739,7 @@ CREATE TABLE BATCH_STEP_EXECUTION_CONTEXT  (
                                                    references BATCH_STEP_EXECUTION(STEP_EXECUTION_ID)
 ) ENGINE=InnoDB CHARACTER SET utf8;
 
-CREATE TABLE BATCH_JOB_EXECUTION_CONTEXT  (
+CREATE TABLE batch_job_execution_context  (
                                               JOB_EXECUTION_ID BIGINT NOT NULL PRIMARY KEY,
                                               SHORT_CONTEXT VARCHAR(2500) NOT NULL,
                                               SERIALIZED_CONTEXT TEXT ,
