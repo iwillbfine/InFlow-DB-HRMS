@@ -195,7 +195,7 @@ VALUES
      'DP002', 'AS003', 'P004', 'R004', 'D006'),
      
 -- 인사팀 부장
-    (5, '201000002', 'EMPLOYEE', '$2a$10$gEF/iaV.jiHyAL0c8TZ2Aufen4ovoQyZX9ipoTKXUSIZ8h9XDlmFa', 'MALE', '최강욱', '1982-09-30',
+    (5, '201000002', 'MANAGER', '$2a$10$gEF/iaV.jiHyAL0c8TZ2Aufen4ovoQyZX9ipoTKXUSIZ8h9XDlmFa', 'MALE', '최강욱', '1982-09-30',
      'choi@company.com', '010-5678-9012', 'https://inflow-emp-profile.s3.ap-northeast-2.amazonaws.com/emp_basic_profile.png', '2020-05-10 09:00:00',
      'ROOKIE', NULL, 'N', 48000000, 3900000, '서울시 강남구 개포로 416', '505동 505호', '06324',
      'DP002', 'AS002', 'P005', 'R005', 'D004'),
