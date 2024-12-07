@@ -188,17 +188,17 @@ VALUES
     (3, '201800001', 'EMPLOYEE', 'password789', 'MALE', '박철수', '1982-11-05',
      'park@company.com', '010-3456-7890', 'https://inflow-emp-profile.s3.ap-northeast-2.amazonaws.com/emp_basic_profile.png', '2018-06-20 09:00:00',
      'VETERAN', '2024-05-30 18:00:00', 'Y', 70000000, 5000000, '서울 강남구 양재대로 478', '303동 303호', '06358',
-     'DP003', 'AS004', 'P003', 'R003', 'D005'),
+     'DP002', 'AS004', 'P003', 'R003', 'D005'),
     (4, '202200001', 'EMPLOYEE', 'password101', 'FEMALE', '이수정', '1995-12-17',
      'lee@company.com', '010-4567-8901', 'https://inflow-emp-profile.s3.ap-northeast-2.amazonaws.com/emp_basic_profile.png', '2022-02-25 09:00:00',
      'ROOKIE', NULL, 'N', 46000000, 3800000, '서울 강남구 삼성로 11', '404동 404호', '06327',
-     'DP004', 'AS003', 'P004', 'R004', 'D006'),
+     'DP002', 'AS003', 'P004', 'R004', 'D006'),
      
 -- 인사팀 부장
     (5, '201000002', 'EMPLOYEE', '$2a$10$gEF/iaV.jiHyAL0c8TZ2Aufen4ovoQyZX9ipoTKXUSIZ8h9XDlmFa', 'MALE', '최강욱', '1982-09-30',
      'choi@company.com', '010-5678-9012', 'https://inflow-emp-profile.s3.ap-northeast-2.amazonaws.com/emp_basic_profile.png', '2020-05-10 09:00:00',
      'ROOKIE', NULL, 'N', 48000000, 3900000, '서울시 강남구 개포로 416', '505동 505호', '06324',
-     'DP005', 'AS002', 'P005', 'R005', 'D004'),
+     'DP002', 'AS002', 'P005', 'R005', 'D004'),
 -- 인사팀 직원
      (6, '201901234', 'HR', '$2a$10$gEF/iaV.jiHyAL0c8TZ2Aufen4ovoQyZX9ipoTKXUSIZ8h9XDlmFa', 'FEMALE', '윤지혜', '1993-05-12',
      'yoon@company.com', '010-6789-0123', 'https://inflow-emp-profile.s3.ap-northeast-2.amazonaws.com/emp_hr.png', '2019-04-01 09:00:00',
