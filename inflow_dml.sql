@@ -156,7 +156,7 @@ BEGIN
         NEW.phone_number,
         attendance_status_type_name,
         CASE
-            WHEN NEW.position_code IN ('P002', 'P005', 'P004', 'P003') THEN 'Y'
+            WHEN NEW.position_code IN ('P005') THEN 'Y'
             ELSE 'N'
         END,
         target_department_code,
