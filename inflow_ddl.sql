@@ -159,6 +159,7 @@ CREATE TABLE session_history (
     chatbot_type VARCHAR(255) NOT NULL CHECK(chatbot_type IN ('CHATBOT','HUMAN')), -- 챗봇 또는 사람
     chatbot_content TEXT,
     session_id VARCHAR(255) NOT NULL,
+    selected_keyword VARCHAR(255) NULL,
     FOREIGN KEY (session_id) REFERENCES chatbot_session(session_id)
 ) ENGINE=INNODB COMMENT '세션별대화이력' CHARACTER SET utf8mb4;
 
