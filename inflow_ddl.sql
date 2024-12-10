@@ -51,7 +51,7 @@ DROP TABLE IF EXISTS attendance_status_type;
 DROP TABLE IF EXISTS department;
 DROP TABLE IF EXISTS company;
 DROP TABLE IF EXISTS BATCH_STEP_EXECUTION_CONTEXT;
-DROP TABLE IF EXISTS BATCH_JOB_EXECUTION_CONTEXT;
+DROP TABLE IF EXISTS batch_job_execution_context;
 DROP TABLE IF EXISTS BATCH_STEP_EXECUTION;
 DROP TABLE IF EXISTS BATCH_JOB_EXECUTION_PARAMS;
 DROP TABLE IF EXISTS BATCH_JOB_EXECUTION;
@@ -146,10 +146,10 @@ CREATE TABLE employee (
 
 -- 사원별 챗봇 세션 테이블
 CREATE TABLE chatbot_session (
-    session_id VARCHAR(255) NOT NULL PRIMARY KEY,
-    employee_id BIGINT NOT NULL,
-    created_at TIMESTAMP NOT NULL,
-    first_question VARCHAR(255) NOT NULL
+                                 session_id VARCHAR(255) NOT NULL PRIMARY KEY,
+                                 employee_id BIGINT NOT NULL,
+                                 created_at TIMESTAMP NOT NULL,
+                                 first_question VARCHAR(255) NOT NULL
 ) ENGINE=INNODB COMMENT '사원별챗봇세션' CHARACTER SET utf8mb4;
 
 
