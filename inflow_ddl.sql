@@ -51,7 +51,7 @@ DROP TABLE IF EXISTS attendance_status_type;
 DROP TABLE IF EXISTS department;
 DROP TABLE IF EXISTS company;
 DROP TABLE IF EXISTS BATCH_STEP_EXECUTION_CONTEXT;
-DROP TABLE IF EXISTS BATCH_JOB_EXECUTION_CONTEXT;
+DROP TABLE IF EXISTS batch_job_execution_context;
 DROP TABLE IF EXISTS BATCH_STEP_EXECUTION;
 DROP TABLE IF EXISTS BATCH_JOB_EXECUTION_PARAMS;
 DROP TABLE IF EXISTS BATCH_JOB_EXECUTION;
@@ -146,20 +146,20 @@ CREATE TABLE employee (
 
 -- 사원별 챗봇 세션 테이블
 CREATE TABLE chatbot_session (
-    session_id VARCHAR(255) NOT NULL PRIMARY KEY,
-    employee_id BIGINT NOT NULL,
-    created_at TIMESTAMP NOT NULL,
-    first_question VARCHAR(255) NOT NULL
+                                 session_id VARCHAR(255) NOT NULL PRIMARY KEY,
+                                 employee_id BIGINT NOT NULL,
+                                 created_at TIMESTAMP NOT NULL,
+                                 first_question VARCHAR(255) NOT NULL
 ) ENGINE=INNODB COMMENT '사원별챗봇세션' CHARACTER SET utf8mb4;
 
 
 -- 세션별 대화 이력 테이블
 CREATE TABLE session_history (
-    session_history_id VARCHAR(255) NOT NULL PRIMARY KEY,
-    chatbot_type VARCHAR(255) NOT NULL CHECK(chatbot_type IN ('CHATBOT','HUMAN')), -- 챗봇 또는 사람
-    chatbot_content TEXT,
-    session_id VARCHAR(255) NOT NULL,
-    FOREIGN KEY (session_id) REFERENCES chatbot_session(session_id)
+                                 session_history_id VARCHAR(255) NOT NULL PRIMARY KEY,
+                                 chatbot_type VARCHAR(255) NOT NULL CHECK(chatbot_type IN ('CHATBOT','HUMAN')), -- 챗봇 또는 사람
+                                 chatbot_content TEXT,
+                                 session_id VARCHAR(255) NOT NULL,
+                                 FOREIGN KEY (session_id) REFERENCES chatbot_session(session_id)
 ) ENGINE=INNODB COMMENT '세션별대화이력' CHARACTER SET utf8mb4;
 
 
